@@ -20,4 +20,5 @@ return [
     'add_user' => 'Add New User' ,
     'settings' => 'Settings' ,
     'change_password' => 'Change Password' ,
+    'add_admin' => 'Add New Admin',
 ];

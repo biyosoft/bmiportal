@@ -1,7 +1,8 @@
 <?php
-
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\customerController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth','verified','request'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-
-
-
 // Admin 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
@@ -37,6 +39,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
     });
     Route::post('logout','Auth\AuthenticatedSessionController@destroy')->name('logout');
+});
+Route::middleware('admin')->group(function () {
+});
+
+//Route for  Customer Profile
+Route::middleware('auth')->group(function(){
+    Route::get('/profile',[customerController::class,'profile'])->name('profile');
+Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
 });
 
 
