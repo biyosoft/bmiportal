@@ -41,6 +41,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::post('logout','Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
 Route::middleware('admin')->group(function () {
+   Route::resource("customers",customerController::class);
+    Route::resource("admins", adminController::class);
 });
 
 //Route for  Customer Profile
