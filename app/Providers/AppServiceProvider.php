@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +25,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        
+        
+        // Blade::if('admin', function () {
+        //     $users = User::all();
+        //     return $users->form_status = 1 ? true : false ;
+            
+        // });
     }
 }

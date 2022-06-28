@@ -18,19 +18,25 @@ class customerController extends Controller
      */
     public function index()
     {
-        dd('customer index route');
-        $users = User::all();
+        $users = User::select("*")
+        ->where("form_status",2)->get();
+        return view('customers.index',compact('users'));
+    }
+
+    public function list()
+    {
+        $users = User::select("*")
+        ->where("form_status",1)->get();
         return view('customers.index',compact('users'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+     
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        dd('customers create account');
         return view('customers.create');
     }
 
@@ -70,7 +76,8 @@ class customerController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::find($id);
+        return view('customers.show',compact('users'));
     }
 
     /**
@@ -103,9 +110,12 @@ class customerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $users = User::find($id);
+        $name = $users->name;
+        $users->delete();
+        return back()->with('error','The User '. $name .' Is Deleted');
     }
 
     public function profile(){
@@ -139,5 +149,14 @@ class customerController extends Controller
         $users->form_status = 1 ;
         $users->save();
         return back()->with('success' , 'Form Is Submitted For Approval');
+    }
+
+    public function formStatus($id){
+
+        $users = User::find($id);
+        $name = $users->name;
+        $users->form_status = 2 ;
+        $users->save();
+        return redirect()->route('customers.index')->with('success','The User '. $name .' Is Approved');
     }
 }

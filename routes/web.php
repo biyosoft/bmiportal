@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\invoiceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -24,7 +25,7 @@ Route::get('/email/verify', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth','verified','request'])->name('dashboard');
+})->middleware(['verified','auth','request'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 // Admin 
@@ -41,14 +42,21 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::post('logout','Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
 Route::middleware('admin')->group(function () {
-   Route::resource("customers",customerController::class);
-    Route::resource("admins", adminController::class);
+    Route::delete('/customers/delete/{id}',[customerController::class,'delete'])->name('customers.delete');
+    Route::put('/customers/formStatus/{id}',[customerController::class,'formStatus'])->name('customers.formStatus');
+    Route::get('/customers/list',[customerController::class,'list'])->name('customers.list');
+    Route::resource("customers",'customerController');
+    Route::resource("admins", 'adminController');
+    Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
+    Route::resource("invoices",'invoiceController');
+   
 });
 
 //Route for  Customer Profile
 Route::middleware('auth')->group(function(){
     Route::get('/profile',[customerController::class,'profile'])->name('profile');
 Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
+
 });
 
 

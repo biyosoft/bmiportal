@@ -18,7 +18,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="font-weight-bolder mb-0">Add Customer</h5>
-            <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
             &nbsp;
             <span class="text-success">
             @if(session('success'))

@@ -18,14 +18,14 @@ class AdminSeeder extends Seeder
     {
         $user = [
             'name'  => 'User',
-            'email' => 'user@user.com',
+            'email' => 'user1@user.com',
             'password' => bcrypt('password')
         ];
         User::create($user);
 
         $admin = [
             'name'  => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'admin1@admin.com',
             'password' =>bcrypt('password'),
         ];
         Admin::insert($admin);

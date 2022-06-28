@@ -46,7 +46,7 @@
                   @if (Route::has('password.request'))
                    <a href="{{ route('password.request') }}">{{__('labels.forget_password')}}</a>
                   @endif
-                    <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <!-- <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a> -->
                   </p>
                 </div>
               </div>

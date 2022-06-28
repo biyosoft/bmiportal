@@ -76,13 +76,13 @@
                         <div class="collapse" id="applicationsExample" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="soft-theme/../pages/applications/kanban.html">
+                                    <a class="nav-link " href="{{route('invoices.index')}}">
                                         <span class="sidenav-mini-icon">k</span>
                                         <span class="sidenav-normal">{{__('labels.view_invoice')}}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="soft-theme/../pages/applications/wizard.html">
+                                    <a class="nav-link " href="{{route('invoices.create')}}">
                                         
                                         <span class="sidenav-normal">{{__('labels.add_invocie')}}</span>
                                     </a>
@@ -120,12 +120,12 @@
                                         <span class="sidenav-normal">{{__('labels.view_customer')}}</span>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('customers.create')}}">
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="{{route('customers.list')}}">
                                         
-                                        <span class="sidenav-normal">{{__('labels.add_customer')}}</span>
+                                        <span class="sidenav-normal">Waiting For Approval</span>
                                     </a>
-                                </li> -->
+                                </li>
                             </ul>
                         </div>
                 </li>
