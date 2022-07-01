@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 
 use function GuzzleHttp\Promise\all;
 
@@ -21,14 +19,6 @@ class invoiceController extends Controller
     {
         $invoices = invoice::all();
         return view('invoices.index',compact('invoices'));
-    }
-
-    public function user_invoices()
-    {
-        $user = Auth::user();
-        // print_r($user->id);die;
-        $invoices = invoice::where('user_id', $user->id)->get();
-        return view('invoices.user_invoices',compact('invoices'));
     }
 
     /**
@@ -76,14 +66,6 @@ class invoiceController extends Controller
     public function show(invoice $invoice)
     {
         return view('invoices.show',compact('invoice'));
-    }
-
-    public function show_user_invoice(Request $user_id)
-    {
-        // echo $user_id->id;die;
-        $invoice = invoice::where('id', $user_id->id)->get();
-        // print_r($invoice);die;
-        return view('invoices.show_user_invoice',compact('invoice'));
     }
 
     /**
