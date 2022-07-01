@@ -55,6 +55,7 @@ class customerController extends Controller
             'status' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed'],
+            
         ]);
            
         $users = new User();

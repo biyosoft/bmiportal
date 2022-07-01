@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['verified','auth','request'])->name('dashboard');
+})->middleware(['auth','request'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 // Admin 
