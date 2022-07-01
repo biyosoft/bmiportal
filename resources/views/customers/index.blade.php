@@ -36,6 +36,10 @@
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Company</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File 1</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File 2</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
           <th class="text-secondary opacity-7">Actions</th>
         </tr>
@@ -44,7 +48,7 @@
         @foreach($users as $user)
         <tr>
             <td>
-            <p class="text-xs font-weight-bold mb-0 text-center">{{$user->id}}</p>
+              <p class="text-xs font-weight-bold mb-0 text-center">{{$user->id}}</p>
             </td>
           <td>
             <div class="d-flex px-2 py-1">
@@ -63,9 +67,23 @@
           <td class="align-middle text-center text-sm">
             <span class="badge badge-sm {{$user->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$user->status == 0 ? 'Inactive' : 'Active'}}</span>
           </td>
+          <td>
+            <p class="text-xs font-weight-bold mb-0">{{$user->phone}}</p>
+          </td>
+          <td>
+            <p class="text-xs font-weight-bold mb-0">{{$user->address}}</p>
+          </td>
+          <td>
+            <p class="text-xs font-weight-bold mb-0">{{$user->file1}}</p>
+          </td>
+          <td>
+            <p class="text-xs font-weight-bold mb-0">{{$user->file2}}</p>
+          </td>
+          
           <td class="align-middle text-center">
             <span class="text-secondary text-xs font-weight-bold">{{$user->created_at->diffForHumans()}}</span>
           </td>
+          
           <td class="align-middle" >
             <div class="dropdown" >
               <button class="btn btn-dark bg-gradient btn-sm mt-3 " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

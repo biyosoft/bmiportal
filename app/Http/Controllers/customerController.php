@@ -139,13 +139,34 @@ class customerController extends Controller
             'company' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', ],
             'phone' => ['required'],
+            'address' => ['required'],
+            'file1' => ['required'],
+            'file2' => ['required'],
         ]);
-           
+
         $users = User::find($id);
+        if(!empty($request->file1)){
+            $file1 = $request->file1;
+            $filename1 = time()."-".$file1->getClientOriginalName();
+            $file1->move(public_path('documents'), $filename1);
+            $files1 = $filename1;
+            $users->file1 = $files1;
+            //echo $files;die;
+        }
+        if(!empty($request->file2)){
+            $file2 = $request->file2;
+            $filename2 = time()."-".$file2->getClientOriginalName();
+            $file2->move(public_path('documents'), $filename2);
+            $files2 = $filename2;
+            $users->file2 = $files2;
+            //echo $files;die;
+        }
+
         $users->name = $request->input('name');
         $users->email = $request->input('email');
         $users->company = $request->input('company');
         $users->phone = $request->input('phone');
+        $users->address = $request->input('address');
         $users->form_status = 1 ;
         $users->save();
         return back()->with('success' , 'Form Is Submitted For Approval');

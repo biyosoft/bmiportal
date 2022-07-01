@@ -33,7 +33,7 @@
             </p>
             <hr class="horizontal dark mt-2">
             <!-- Customer add form started here  -->
-            <form action="{{route('customers.store1',$users->id)}}" method="POST">
+            <form action="{{route('customers.store1',$users->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <!-- company and name fields  -->
                 <div class="row justify-content-center">
@@ -76,6 +76,35 @@
                         </div>
                     </div>
                 </div>
+            {{-- address --}}
+            <div class="row">
+                   
+                <div class="col-md-12">
+                        <div class="form-group mb-3">
+                            <label for="company">Address</label>
+                            <input type="text" value="{{$users->address}}" class="form-control "  name="address" required>
+                            <span class="text-danger">@error('address') {{$message}} @enderror</span>
+                        </div>
+                </div>
+            </div>
+            {{-- upload files --}}
+            <div class="row">
+                   
+                <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="file1">File 1</label>
+                            <input type="file" class="form-control" name="file1" required>
+                            <span class="text-danger">@error('file1') {{$message}} @enderror</span>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="file2">File 2</label>
+                        <input type="file" class="form-control" name="file2" required>
+                        <span class="text-danger">@error('file2') {{$message}} @enderror</span>
+                    </div>
+            </div>
+            </div>
             <!-- Add Customer Button  -->
                 <div class="button-row d-flex ">
                     <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" 

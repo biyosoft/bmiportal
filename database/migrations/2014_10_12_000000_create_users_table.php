@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('status')->default(1);   
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('address')->nullable()->default(NULL);
+            $table->string('file1')->nullable();
+            $table->string('file2')->nullable();
             $table->string('form_status')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
