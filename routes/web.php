@@ -47,15 +47,20 @@ Route::middleware('admin')->group(function () {
     Route::get('/customers/list',[customerController::class,'list'])->name('customers.list');
     Route::resource("customers",'customerController');
     Route::resource("admins", 'adminController');
-    Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
-    Route::resource("invoices",'invoiceController');
+    // Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
+    // Route::resource("invoices",'invoiceController');
    
 });
+
+Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
+Route::resource("invoices",'invoiceController');
 
 //Route for  Customer Profile
 Route::middleware('auth')->group(function(){
     Route::get('/profile',[customerController::class,'profile'])->name('profile');
 Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
+Route::get("user_invoices",'invoiceController@user_invoices')->name('user_invoices');
+Route::get("show_user_invoice/{id}",'invoiceController@show_user_invoice')->name('show_user_invoice');
 
 });
 
