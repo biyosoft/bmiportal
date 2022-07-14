@@ -66,7 +66,8 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="invoice_doc">Invoice Doc</label>
-                            <input type="file" class="form-control"  name="file" required accept=".pdf,.doc,.xlsx,.docx">
+                            <input type="file" class="form-control file" value="{{$invoice->invoice_doc}}" name="file" required accept=".pdf,.doc,.xlsx,.docx">
+                            <span id="file_prepopulate"></span>
                             <span   class="text-danger text-sm ">@error('file') {{$message}} @enderror</span>
 
                         </div>
@@ -99,3 +100,13 @@
    </div>
 </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var a = "<?= $invoice->invoice_doc; ?>";
+        if (a) {
+            $('.file').attr("required", false);
+        }
+        $('#file_prepopulate').text(a);
+    });
+</script>

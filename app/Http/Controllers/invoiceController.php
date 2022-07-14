@@ -117,6 +117,8 @@ class invoiceController extends Controller
                 $file->move(public_path('documents'), $filename);
                 $files = $filename; 
                 $invoices->invoice_doc = $files;
+        }else{
+                $invoices->invoice_doc = $invoices->invoice_doc;
         }
         $invoices->amount = $request->input('amount');
         $invoices->invoiceId = $request->input('invoiceId');
