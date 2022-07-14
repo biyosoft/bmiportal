@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="customer">Customer</label>
+                            <label for="customer">{{__('labels.customer')}}</label>
                             <select name="user_id" class="form-control">
                                 <option value=""></option>
                                 @foreach($users as $user)
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="invocieId">Invoice ID</label>
+                            <label for="invocieId">{{__('labels.invoice_no')}}</label>
                             <input type="text" value="{{$invoice->invoiceId}}" class="form-control" name="invoiceId" required>
                             <span class="text-danger">@error('invoiceId') {{$message}} @enderror</span>
 
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="date">Due Date</label>
+                            <label for="date">{{__('labels.due_date')}}</label>
                             <input type="date" value="{{$invoice->date}}" class="form-control" name="date" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
@@ -65,7 +65,7 @@
             <!-- email and invoice fields  -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="invoice_doc">Invoice Doc</label>
+                            <label for="invoice_doc">{{__('labels.invoice_doc')}}</label>
                             <input type="file" class="form-control file" value="{{$invoice->invoice_doc}}" name="file" required accept=".pdf,.doc,.xlsx,.docx">
                             <span id="file_prepopulate"></span>
                             <span   class="text-danger text-sm ">@error('file') {{$message}} @enderror</span>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="amount">Amount</label>
+                            <label for="amount">{{__('labels.amount')}}</label>
                             <input type="amount" 
                             class="form-control" 
                             value="{{$invoice->amount}}"
