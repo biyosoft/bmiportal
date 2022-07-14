@@ -87,6 +87,12 @@
                                         <span class="sidenav-normal">{{__('labels.add_invocie')}}</span>
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="{{route('invoices.upload')}}">
+                                        
+                                        <span class="sidenav-normal">{{__('labels.upload_invocie')}}</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                 </li>

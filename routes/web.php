@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,11 @@ Route::middleware('admin')->group(function () {
 });
 
 Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
+Route::match(['get','post'],'upload/invoice',[invoiceController::class,'upload'])->name('invoices.upload');
 Route::resource("invoices",'invoiceController');
+Route::match(['get','post'],'/bulk-invoices',[fileController::class,'bulkInvoices'])->name('bulk-invoices');
+Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
+Route::resource('files','fileController');
 
 //Route for  Customer Profile
 Route::middleware('auth')->group(function(){

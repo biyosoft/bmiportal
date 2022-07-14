@@ -27,7 +27,7 @@ class invoiceController extends Controller
     {
         $user = Auth::user();
         // print_r($user->id);die;
-        $invoices = invoice::where('user_id', $user->id)->get();
+        $invoices = invoice::where('user_id',1)->get();
         return view('invoices.user_invoices',compact('invoices'));
     }
 
@@ -54,6 +54,7 @@ class invoiceController extends Controller
         // dd($request->all());
         $invoices = new invoice();
         $invoices->user_id = $request->input('user_id');
+        $invoices->invoiceId = $request->input('invoiceID');
         $invoices->date = $request->input('date');
         if (!empty($request->file)) {
              $file = $request->file;
@@ -73,7 +74,7 @@ class invoiceController extends Controller
      * @param  \App\Models\invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(invoice $invoice)
+    public function show(Request $request,invoice $invoice)
     {
         return view('invoices.show',compact('invoice'));
     }
@@ -105,8 +106,9 @@ class invoiceController extends Controller
      * @param  \App\Models\invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, invoice $invoices)
+    public function update(Request $request,$id)
     {
+        $invoices = invoice::find($id);
         $invoices->user_id = $request->input('user_id');
         $invoices->date = $request->input('date');
         if (!empty($request->file)) {
@@ -117,6 +119,7 @@ class invoiceController extends Controller
                 $invoices->invoice_doc = $files;
         }
         $invoices->amount = $request->input('amount');
+        $invoices->invoiceId = $request->input('invoiceId');
         $invoices->save();
         return redirect()->route('invoices.index')->with('success','Invoice Has Been Updated Succesfully !');
     }
@@ -135,6 +138,12 @@ class invoiceController extends Controller
       $headers = ['Content-Type: application/pdf'];
      return response()->download($filePath, $fileName, $headers);
 
+    }
+
+    public function upload(){
+        // dd('dafs');
+        $users = User::all();
+        return view('invoices.upload',compact('users'));
     }
 
     /**

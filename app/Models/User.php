@@ -11,6 +11,7 @@ use App\Models\invoice;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

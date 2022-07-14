@@ -33,7 +33,7 @@
                 @csrf
                 @method('put')
             <!-- company and name fields  -->
-                <div class="row justify-content-center">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="customer">Customer</label>
@@ -48,15 +48,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
+                            <label for="invocieId">Invoice ID</label>
+                            <input type="text" value="{{$invoice->invoiceId}}" class="form-control" name="invoiceId" required>
+                            <span class="text-danger">@error('invoiceId') {{$message}} @enderror</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
                             <label for="date">Due Date</label>
                             <input type="date" value="{{$invoice->date}}" class="form-control" name="date" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
                     </div>
-                </div>
             <!-- email and invoice fields  -->
-                <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="invoice_doc">Invoice Doc</label>
