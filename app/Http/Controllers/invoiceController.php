@@ -54,7 +54,7 @@ class invoiceController extends Controller
         // dd($request->all());
         $invoices = new invoice();
         $invoices->user_id = $request->input('user_id');
-        $invoices->invoiceId = $request->input('invoiceID');
+        $invoices->invoiceId = $request->input('invoiceId');
         $invoices->date = $request->input('date');
         if (!empty($request->file)) {
              $file = $request->file;
