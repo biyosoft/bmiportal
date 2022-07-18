@@ -33,7 +33,7 @@
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice Doc</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created at</th>
-          <!-- <th class="text-secondary opacity-7">Actions</th> -->
+          <th class="text-secondary opacity-7">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -87,13 +87,7 @@
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="{{route('show_user_invoice',$invoice->id)}}">View</a></li>
-                <!-- <li><a class="dropdown-item" href="{{route('invoices.edit',$invoice->id)}}">Edit</a></li>
-                <li>
-                  <form action="{{route('invoices.destroy',$invoice->id)}}" method="post">
-                    @csrf
-                    @method('delete')
-                  <button type="submit" class="dropdown-item" href="">Delete</button>
-                  </form> -->
+                <li><a class="dropdown-item" href="{{route('payments.create1',$invoice->id)}}">Add Payment</a></li>
                 </li>
               </ul>
             </div>

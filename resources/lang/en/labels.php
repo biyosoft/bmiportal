@@ -27,4 +27,8 @@ return [
     'invoice_doc' => 'Invoice Document',
     'due_date' => 'Due Date',
     'amount' => 'Amount',
+    'view_payment' => 'View Payments' ,
+    'add_payment' => 'Add Payment' ,
+    'payments' => 'Payments',
+    'proof' => 'Proof Document'
 ];

@@ -3,6 +3,8 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Models\payment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -59,6 +61,13 @@ Route::resource("invoices",'invoiceController');
 Route::match(['get','post'],'/bulk-invoices',[fileController::class,'bulkInvoices'])->name('bulk-invoices');
 Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
 Route::resource('files','fileController');
+
+
+//Routes for payment controller
+Route::match(['get','post'],'/payment/create/{id}',[PaymentController::class,'create1'])->name('payments.create1');
+Route::get('/payment',[PaymentController::class,'index'])->name('pays.index');
+Route::post('/payment/store/{id}',[PaymentController::class,'store'])->name('pays.store');
+
 
 //Route for  Customer Profile
 Route::middleware('auth')->group(function(){
