@@ -12,7 +12,7 @@
    </div>
 </nav>
 <div class="row">
-    <div class="col">
+    <div class="col m-2">
         <div class="card">
             <div class="card-body">
                 @if(session('success'))
@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <b>Invoice Doc</b>
+                        <b>Invoice Document</b>
                         <p>{{$invoice[0]->invoice_doc}}</p>
                     </div>
                     <div class="col">
@@ -53,6 +53,61 @@
                         <a href="{{route('invoices.download',$invoice[0]->id)}}"  class="btn  bg-gradient-dark btn-sm align-middle mt-1" type="submit">{{$invoice[0]->invoice_doc}}</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col m-2">
+        <div class="card mt-2">
+            <div class="card-body">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{session('success')}}
+                    </div>
+                @endif
+                <div class="row">
+                    <div class="col">
+                        <h5 class="font-weight-bolder mb-0">Payment Details</h5>
+                        <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+                    </div>
+                    
+                </div>
+                <br>
+                @if($invoice[0]->payment)
+                <div class="row">
+                    <div class="col">
+                        <b>Payment Id</b>
+                        <p>{{$invoice[0]->payment->id}}</p>
+                    </div>
+                    <div class="col">
+                        <b>Status</b>
+                        <p><span class="badge badge-sm {{$invoice[0]->payment->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$invoice[0]->payment->status == 0 ? 'Pending For Approval' : 'Approved'}}</span></p>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Proof Document</b>
+                        <p>{{$invoice[0]->payment->proof}}</p>
+                    </div>
+                    <div class="col">
+                        <b>Paid At</b>
+                        <p>{{$invoice[0]->payment->due_Date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col">
+                        <a href="{{route('payments.download',$invoice[0]->payment->id)}}"  class="btn  bg-gradient-dark btn-sm align-middle mt-1" type="submit">{{$invoice[0]->payment->proof}}</a>
+                    </div>
+                </div>
+                @else
+                <a href="{{route('payments.create1',$invoice[0]->id)}}"
+                class="btn  bg-gradient-dark btn-sm align-middle mt-1"
+                >Add Payment</a>
+                @endif
+
             </div>
         </div>
     </div>

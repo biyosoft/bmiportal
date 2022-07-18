@@ -29,6 +29,7 @@ return [
     'amount' => 'Amount',
     'view_payment' => 'View Payments' ,
     'add_payment' => 'Add Payment' ,
+    'payments_all' => 'All Payments',
     'payments' => 'Payments',
     'proof' => 'Proof Document'
 ];

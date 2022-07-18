@@ -70,6 +70,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- hidden field for forign invoice id  -->
+                <input type="hidden" value="{{$invoices->id}}" name="invoice_id">
             <!-- password repeat and status fields  -->
                 <div class="row ">
                     <div class="col-md-6">

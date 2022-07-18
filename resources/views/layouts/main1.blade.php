@@ -160,15 +160,15 @@
                         <div class="collapse" id="applicationsExamp" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="soft-theme/../pages/applications/kanban.html">
+                                    <a class="nav-link " href="{{route('payments.approved')}}">
                                         
-                                        <span class="sidenav-normal"> {{__('labels.view_payment')}}</span>
+                                        <span class="sidenav-normal"> All Payments </span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="soft-theme/../pages/applications/wizard.html">
+                                    <a class="nav-link " href="{{route('payments.pending')}}">
                                         
-                                        <span class="sidenav-normal">{{__('labels.add_payment')}}</span>
+                                        <span class="sidenav-normal">Pending Payments</span>
                                     </a>
                                 </li>
                             </ul>

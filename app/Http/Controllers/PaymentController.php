@@ -42,6 +42,18 @@ class PaymentController extends Controller
         return view('payments.create',compact('invoices'));
     }
 
+
+
+    public function pending(){
+        $payments = payment::all()->where('status',0);
+        return view('payments.pending_payments',compact('payments'));
+    }
+
+    public function approved(){
+        $payments = invoice::all()->where('status',1);
+        return view('payments.approved_payments',compact('payments'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -54,6 +66,7 @@ class PaymentController extends Controller
         $payments = new payment();
         $invoices = invoice::find($id);
         $payments->invoice = $invoices->invoiceId;
+        $payments->invoice_id = $request->input('invoice_id');
         $payments->amount = $invoices->amount;
         $payments->due_date = $invoices->date;
         $payments->payment_date = $request->input('payment_date');
@@ -112,5 +125,15 @@ class PaymentController extends Controller
     public function destroy(payment $payment)
     {
         //
+    }
+
+    public function download($id){
+        $payments = payment::find($id);
+        // dd($invoices);
+        $fileName = $payments->proof;
+        $filePath = public_path('payments/'.$fileName);
+      $headers = ['Content-Type: application/pdf'];
+     return response()->download($filePath, $fileName, $headers);
+
     }
 }
