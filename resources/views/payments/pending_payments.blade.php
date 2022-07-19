@@ -12,16 +12,18 @@
    </div>
 </nav>
 <div class="card">
+    <div class="m-3">
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success text-white" style="max-width: 350px;">
             {{session('success')}}
         </div>
     @endif
     @if(session('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-white" style="max-width: 350px;">
             {{session('error')}}
         </div>
     @endif
+    </div>
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
@@ -33,6 +35,7 @@
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment Date</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proof</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -77,7 +80,10 @@
             </div>
           </td>
           <td class="align-middle text-center">
-          <span class="badge badge-sm {{$payments->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payments->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
+             <span class="badge badge-sm {{$payments->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payments->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
+          </td>
+          <td class="align-middle text-center">
+             <a href="{{route('payments.is_approved',$payments->id)}}" class="btn btn-primary btn-sm mt-3">Approve</a>
           </td>
         </tr>
         @endforeach

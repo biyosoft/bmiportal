@@ -41,16 +41,13 @@
                 <div class="row">
                     <div class="col">
                         <b>Invoice Document</b>
-                        <p>{{$invoice[0]->invoice_doc}}</p>
+                        <p><a style="color:#009fe3;" href="{{route('invoices.download',$invoice[0]->id)}}">
+                            {{$invoice[0]->invoice_doc}}
+                        </a></p>
                     </div>
                     <div class="col">
                         <b>Amount</b>
                         <p>{{$invoice[0]->amount}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                <div class="col">
-                        <a href="{{route('invoices.download',$invoice[0]->id)}}"  class="btn  bg-gradient-dark btn-sm align-middle mt-1" type="submit">{{$invoice[0]->invoice_doc}}</a>
                     </div>
                 </div>
             </div>
@@ -78,8 +75,8 @@
                 @if($invoice[0]->payment)
                 <div class="row">
                     <div class="col">
-                        <b>Payment Id</b>
-                        <p>{{$invoice[0]->payment->id}}</p>
+                        <b>Payment ID</b>
+                        <p><a style="color:#009fe3;" href="{{route('payment.show',$invoice[0]->payment->id)}}" >{{$invoice[0]->payment->id}}</a></p>
                     </div>
                     <div class="col">
                         <b>Status</b>
@@ -90,21 +87,18 @@
                 <div class="row">
                     <div class="col">
                         <b>Proof Document</b>
-                        <p>{{$invoice[0]->payment->proof}}</p>
+                        <p><a style="color:#009fe3;" href="{{route('payments.download',$invoice[0]->payment->id)}}">
+                            {{$invoice[0]->payment->proof}}</a></p>
                     </div>
                     <div class="col">
                         <b>Paid At</b>
                         <p>{{$invoice[0]->payment->due_Date}}</p>
                     </div>
                 </div>
-                <div class="row">
-                <div class="col">
-                        <a href="{{route('payments.download',$invoice[0]->payment->id)}}"  class="btn  bg-gradient-dark btn-sm align-middle mt-1" type="submit">{{$invoice[0]->payment->proof}}</a>
-                    </div>
-                </div>
                 @else
                 <a href="{{route('payments.create1',$invoice[0]->id)}}"
-                class="btn  bg-gradient-dark btn-sm align-middle mt-1"
+                class="btn text-white shadow  mt-1"
+                style=" background-image: linear-gradient(310deg, #009fe3 0%, #009fe3 100%) !important;"
                 >Add Payment</a>
                 @endif
 

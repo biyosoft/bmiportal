@@ -19,13 +19,18 @@
   @livewireStyles
   @powerGridStyles
 </head>
+<style>
+  .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
+       background-image: linear-gradient(310deg, #009fe3 0%, #009fe3 100%) !important;
+  }
+</style>
 
 <body class="g-sidenav-show bg-gray-100">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-                <img src="{{asset('soft-theme/assets/img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+                <img src="{{asset('soft-theme/assets/img/logo-ct-dark.png')}}" class="navbar-brand-img h-200" alt="main_logo">
                 <span class="ms-1 font-weight-bold">Admin Dashboard</span>
             </a>
         </div>
@@ -259,7 +264,22 @@
   <script src="{{asset('soft-theme/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script>
+    const links = document.querySelectorAll('.nav-link');
+    
+    if (links.length) {
+      links.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          links.forEach((link) => {
+              link.classList.remove('active');
+          });
+          link.classList.add('active');
+        });
+      });
+    }
+  </script>
   @yield('scripts')
+  
   @livewireScripts
   @powerGridScripts
   <script src="{{ asset('js/app.js') }}" defer></script>

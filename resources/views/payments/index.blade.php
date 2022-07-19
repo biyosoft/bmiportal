@@ -44,7 +44,9 @@
           <td>
             <div class="d-flex px-2 py-1">
               <div class="d-flex flex-column justify-content-center">
-                <p class="text-xs text-secondary mb-0">{{$payments->invoice}}</p>
+                <p class="text-xs text-secondary mb-0">
+                  <a style="color:#009fe3;" href="{{route('show_user_invoice',$payments->invoice_id)}}">{{$payments->invoice}}</a>
+                </p>
               </div>
             </div>
           </td>

@@ -15,8 +15,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        $invoices = invoice::all();
         $payments = payment::all();
-        return view('payments.index',compact('payments'));
+        return view('payments.index',compact('payments','invoices'));
     }
 
     /**
@@ -50,8 +51,16 @@ class PaymentController extends Controller
     }
 
     public function approved(){
-        $payments = invoice::all()->where('status',1);
+        $payments = payment::all()->where('status',1);
         return view('payments.approved_payments',compact('payments'));
+    }
+
+    public function is_approved($id){
+        $payments = payment::find($id);
+        $payments->status = 1 ;
+        $payments->save();
+        return redirect()->back()
+        ->with('success','The Payment Has Been Approved');
     }
 
     /**
@@ -90,7 +99,7 @@ class PaymentController extends Controller
      */
     public function show(payment $payment)
     {
-        //
+        return view('payments.show',compact('payment'));
     }
 
     /**

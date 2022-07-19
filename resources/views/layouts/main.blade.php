@@ -20,6 +20,12 @@
   @powerGridStyles
 </head>
 
+<style>
+  .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
+       background-image: linear-gradient(310deg, #009fe3 0%, #009fe3 100%) !important;
+  }
+</style>
+
 <body class="g-sidenav-show bg-gray-100">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white" id="sidenav-main">
         <div class="sidenav-header">
@@ -165,6 +171,21 @@
   <script src="{{asset('soft-theme/assets/js/plugins/jkanban/jkanban.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/chartjs.min.js')}}"></script>
   <script>
+    const links = document.querySelectorAll('.nav-link');
+    
+    if (links.length) {
+      links.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          links.forEach((link) => {
+              link.classList.remove('active');
+          });
+          link.classList.add('active');
+        });
+      });
+    }
+  </script>
+  <script>
+    
     var ctx1 = document.getElementById("chart-line-1").getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
