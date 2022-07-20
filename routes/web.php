@@ -56,12 +56,11 @@ Route::middleware('admin')->group(function () {
 });
 
 Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
-Route::match(['get','post'],'upload/invoice',[invoiceController::class,'upload'])->name('invoices.upload');
+Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');
 Route::resource("invoices",'invoiceController');
 Route::match(['get','post'],'/bulk-invoices',[fileController::class,'bulkInvoices'])->name('bulk-invoices');
 Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
 Route::resource('files','fileController');
-
 
 //Routes for customer sides payment actions
 Route::match(['get','post'],'/payment/create/{id}',[PaymentController::class,'create1'])->name('payments.create1');
@@ -69,6 +68,7 @@ Route::get('/payment',[PaymentController::class,'index'])->name('pays.index');
 Route::post('/payment/store/{id}',[PaymentController::class,'store'])->name('pays.store');
 Route::get('/payments/download/{id}',[PaymentController::class,'download'])->name('payments.download');
 Route::get('/payment/show/{payment}',[PaymentController::class,'show'])->name('payment.show');
+
 //Payments routes for admin side payment actions 
 Route::get('payments/pending',[PaymentController::class,'pending'])->name('payments.pending');
 Route::get('payments/approved',[PaymentController::class,'approved'])->name('payments.approved');

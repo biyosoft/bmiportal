@@ -17,7 +17,6 @@
   <link href="{{asset('soft-theme/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('soft-theme/assets/css/soft-ui-dashboard.css?v=1.0.9')}}" rel="stylesheet" />
   @livewireStyles
-  @powerGridStyles
 </head>
 <style>
   .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
@@ -38,7 +37,7 @@
         <div class="" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{route('admin.dashboard')}}">
+                    <a class="nav-link {{(request()->segment(2)=='dashboard') ? 'active' : '' }}" href="{{route('admin.dashboard')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -59,7 +58,7 @@
                 </li>
                 <!-- invoices menu starts  -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applicationsExample" class="nav-link collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#applicationsExample" class="nav-link {{(request()->segment(1)=='invoices') ? 'active' : '' }} collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -78,22 +77,22 @@
                         </div>
                     <span class="nav-link-text ms-1">{{__('labels.invoices')}}</span>
                     </a>
-                        <div class="collapse" id="applicationsExample" style="">
+                        <div class=" {{(request()->segment(1)=='invoices') ? '' : 'collapse' }}" id="applicationsExample" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('invoices.index')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='invoices') && (request()->segment(2)=='')  ? 'active' : '' }}" href="{{route('invoices.index')}}">
                                         <span class="sidenav-mini-icon">k</span>
                                         <span class="sidenav-normal">{{__('labels.view_invoice')}}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('invoices.create')}}">
+                                    <a class="nav-link {{(request()->segment(2)=='create') ? 'active' : '' }}" href="{{route('invoices.create')}}">
                                         
                                         <span class="sidenav-normal">{{__('labels.add_invocie')}}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('invoices.upload')}}">
+                                    <a class="nav-link {{(request()->segment(2)=='upload') ? 'active' : '' }}" href="{{route('invoices.upload')}}">
                                         
                                         <span class="sidenav-normal">{{__('labels.upload_invocie')}}</span>
                                     </a>
@@ -104,7 +103,7 @@
                 <!-- invoices menu ends  -->
                 <!-- customer menu starts  -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applicationsExampl" class="nav-link collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#applicationsExampl" class="nav-link {{(request()->segment(1)=='customers') ? 'active' : '' }}  " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -123,16 +122,16 @@
                         </div>
                     <span class="nav-link-text ms-1">{{__('labels.customers')}}</span>
                     </a>
-                        <div class="collapse" id="applicationsExampl" style="">
+                        <div class="{{(request()->segment(1)=='customers')  ? '' : 'collapse' }}" id="applicationsExampl" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('customers.index')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='customers') && (request()->segment(2)=='')  ? 'active' : '' }}" href="{{route('customers.index')}}">
                                         
                                         <span class="sidenav-normal">{{__('labels.view_customer')}}</span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('customers.list')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='customers') && (request()->segment(2)=='list')  ? 'active' : '' }}" href="{{route('customers.list')}}">
                                         
                                         <span class="sidenav-normal">Waiting For Approval</span>
                                     </a>
@@ -143,7 +142,7 @@
                 <!-- customer menu ends  -->
                 <!-- payments menu starts  -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applicationsExamp" class="nav-link collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#applicationsExamp" class="nav-link {{(request()->segment(1)=='payments') ? 'active' : '' }}" aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -162,16 +161,16 @@
                         </div>
                     <span class="nav-link-text ms-1">{{__('labels.payments')}}</span>
                     </a>
-                        <div class="collapse" id="applicationsExamp" style="">
+                        <div class="{{(request()->segment(1)=='payments')  ? '' : 'collapse' }}" id="applicationsExamp" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('payments.approved')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='payments') && (request()->segment(2)=='approved')  ? 'active' : '' }}" href="{{route('payments.approved')}}">
                                         
                                         <span class="sidenav-normal"> All Payments </span>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('payments.pending')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='payments') && (request()->segment(2)=='pending')  ? 'active' : '' }}" href="{{route('payments.pending')}}">
                                         
                                         <span class="sidenav-normal">Pending Payments</span>
                                     </a>
@@ -264,20 +263,7 @@
   <script src="{{asset('soft-theme/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-  <script>
-    const links = document.querySelectorAll('.nav-link');
-    
-    if (links.length) {
-      links.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          links.forEach((link) => {
-              link.classList.remove('active');
-          });
-          link.classList.add('active');
-        });
-      });
-    }
-  </script>
+  
   @yield('scripts')
   
   @livewireScripts
