@@ -31,7 +31,6 @@
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due Date</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment Date</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proof</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
         </tr>
       </thead>
@@ -66,13 +65,6 @@
             <div class="d-flex px-2 py-1">
               <div class="d-flex flex-column justify-content-center">
                 <p class="text-xs text-secondary mb-0">{{$payments->payment_date}}</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="d-flex px-2 py-1">
-              <div class="d-flex flex-column justify-content-center">
-                <p class="text-xs text-secondary mb-0">{{$payments->proof}}</p>
               </div>
             </div>
           </td>
