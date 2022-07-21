@@ -37,9 +37,6 @@
           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Company</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File 1</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File 2</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
           <th class="text-secondary opacity-7">Actions</th>
         </tr>
@@ -52,9 +49,6 @@
             </td>
           <td>
             <div class="d-flex px-2 py-1">
-              <div>
-                <img src="https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-              </div>
               <div class="d-flex flex-column justify-content-center">
                 <h6 class="mb-0 text-xs">{{$user->name}}</h6>
                 <p class="text-xs text-secondary mb-0">{{$user->email}}</p>
@@ -69,15 +63,6 @@
           </td>
           <td>
             <p class="text-xs font-weight-bold mb-0">{{$user->phone}}</p>
-          </td>
-          <td>
-            <p class="text-xs font-weight-bold mb-0">{{$user->address}}</p>
-          </td>
-          <td>
-            <p class="text-xs font-weight-bold mb-0">{{$user->file1}}</p>
-          </td>
-          <td>
-            <p class="text-xs font-weight-bold mb-0">{{$user->file2}}</p>
           </td>
           
           <td class="align-middle text-center">
