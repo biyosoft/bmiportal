@@ -97,8 +97,13 @@
         </tr>
         @endforeach
       </tbody>
+      
     </table>
   </div>
   </div>
 </div>
+<div class="mt-2">
+  {{$users->links()}}
+</div>
+
 @endsection

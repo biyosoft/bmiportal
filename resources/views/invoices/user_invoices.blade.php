@@ -98,4 +98,7 @@
     </table>
   </div>
 </div>
+<div class="mt-2">
+  {{$invoices->links()}}
+</div>
 @endsection

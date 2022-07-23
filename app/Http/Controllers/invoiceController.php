@@ -20,7 +20,7 @@ class invoiceController extends Controller
     public function index()
     {
         $invoices = invoice::all();
-        return view('invoices.index',compact('invoices'));
+        return view('invoices.index', ['invoices' => invoice::paginate(5)],compact('invoices'));
     }
 
     public function user_invoices()
@@ -28,7 +28,7 @@ class invoiceController extends Controller
         $user = Auth::user();
         // print_r($user->id);die;
         $invoices = invoice::where('user_id',1)->get();
-        return view('invoices.user_invoices',compact('invoices'));
+        return view('invoices.user_invoices', ['invoices' => invoice::paginate(5)],compact('invoices'));
     }
 
     /**

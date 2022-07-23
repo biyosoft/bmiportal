@@ -77,4 +77,7 @@
     </table>
   </div>
 </div>
+<div class="mt-2">
+  {{$payments->links()}}
+</div>
 @endsection

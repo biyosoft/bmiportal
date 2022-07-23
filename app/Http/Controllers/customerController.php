@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class customerController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +21,7 @@ class customerController extends Controller
     {
         $users = User::select("*")
         ->where("form_status",2)->get();
-        return view('customers.index',compact('users'));
+        return view('customers.index', ['users' => User::paginate(5)], compact('users'));
     }
 
     public function list()

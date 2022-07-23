@@ -17,7 +17,7 @@ class PaymentController extends Controller
     {
         $invoices = invoice::all();
         $payments = payment::all();
-        return view('payments.index',compact('payments','invoices'));
+        return view('payments.index', ['payments' => payment::paginate(5)], compact('payments','invoices'));
     }
 
     /**
@@ -52,7 +52,7 @@ class PaymentController extends Controller
 
     public function approved(){
         $payments = payment::all()->where('status',1);
-        return view('payments.approved_payments',compact('payments'));
+        return view('payments.approved_payments', ['payments' => payment::paginate(5)],compact('payments'));
     }
 
     public function is_approved($id){
