@@ -4,7 +4,10 @@ use App\Http\Controllers\customerController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\PaymentController;
+use App\Models\Admin;
 use App\Models\payment;
+use App\Models\User;
+use App\Notifications\PaymentProofUploaded;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -19,6 +22,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+    $user = User::find(1);
+    Admin::find(1)->notify(new PaymentProofUploaded($user));
+    Admin::find(2)->notify(new PaymentProofUploaded($user));
     return view('welcome');
 });
 

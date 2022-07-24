@@ -20,7 +20,7 @@ class invoiceController extends Controller
     public function index()
     {
         $invoices = invoice::all();
-        return view('invoices.index', ['invoices' => invoice::paginate(5)],compact('invoices'));
+        return view('invoices.index', ['invoices' => invoice::paginate(2)],compact('invoices'));
     }
 
     public function user_invoices()
