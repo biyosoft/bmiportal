@@ -1,12 +1,6 @@
 @extends('layouts.main1')
 @section('content')
-<style>
-  .page-link.active, .active>.page-link{
-    color:white !important;
-    background-color: reset !important;
-    background-image: linear-gradient(310deg, #7928CA 0%, #009fe3 70%) !important;
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="{{ url('/css/pagination_style.css') }}" />
 <nav class="navbar navbar-main navbar-expand-lg px-0 shadow-none border-radius-xl">
    <div class="container-fluid py-1 px-3">
    <nav aria-label="breadcrumb">
@@ -31,7 +25,7 @@
     @endif
   <div class="table-responsive">
     <div class="dataTable-wrapper dataTable-loading no-footer sortable fixed-height fixed-columns">
-      <div class="datTable-top">
+      <div class="dataTable-top">
         <table class="table align-items-center mb-0">
               <thead>
                 <tr>

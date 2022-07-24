@@ -47,7 +47,7 @@ class PaymentController extends Controller
 
     public function pending(){
         $payments = payment::all()->where('status',0);
-        return view('payments.pending_payments',compact('payments'));
+        return view('payments.pending_payments', ['payments' => payment::paginate(5)],compact('payments'));
     }
 
     public function approved(){

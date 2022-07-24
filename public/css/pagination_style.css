@@ -1,0 +1,6 @@
+.page-link.active, .active>.page-link{
+    color:white !important;
+    background-color: reset !important;
+    border-color: #009fe3 !important;
+    background-image: linear-gradient(310deg, #7928CA 0%, #009fe3 70%) !important;
+}
