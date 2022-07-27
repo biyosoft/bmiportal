@@ -17,7 +17,6 @@
   <link href="{{asset('soft-theme/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('soft-theme/assets/css/soft-ui-dashboard.css?v=1.0.9')}}" rel="stylesheet" />
   @livewireStyles
-  @powerGridStyles
 </head>
 
 <style>
@@ -161,7 +160,6 @@
   </main>
   <!--   Core JS Files   -->
   @livewireScripts
-  @powerGridScripts
   <script src="{{asset('soft-theme/assets/js/core/popper.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>

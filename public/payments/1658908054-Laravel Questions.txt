@@ -1,0 +1,39 @@
+Q1 :  Why do you want to leave previous office ?
+Q2 :  What you expect from us ?
+Q3 :  swap two numbers without using the third variable
+Q4 :  find the second largest value in SQL
+Q5 :  multiply two numbers witout using * operator 
+Q6 :  What are web sockets in laravel 
+Q7 :  third party api integration
+Q8 :  Restful API 
+Q9 :  first file to open in laravel index.php in laravel file 
+Q10 : What are migrations
+Q11 : Can we use tabels without migrations
+Q12 : Why to use mdoels
+Q13 : user -> car -> model
+Q14 : user -> friend -> friends
+Q15 : How to achieve multi auth in laravel 
+Q16 : service providers in laravel 
+Q17 : Laravel lifecycle
+Q18 : What frontend to use in laravel
+Q19 : many through in laravel
+Q20 : What is tinker ?
+Q21 : What is chache system in laravel ?
+Q22 : What are DB Transaction ?
+Q23 : what is laravel request cycle?
+Q24 : namespace in laravel ?
+Q25 : what are facades 
+Q26 : what are pivot table
+Q27 : how to make db queries fast
+Q28 : What is brodacasting and event handlers .
+Q29 : what is lasy loading and eager loading .
+Q30 : What is http kernel ?
+Q31 : database seperation 
+Q32 : Static class or type of classes in laravel
+Q33 : package containeer
+Q34 : service container and service providers in laravel
+Q35 : Difference between left and right join
+Q36 : Implicit controller 
+Q37 : Design Patterns in laravel
+Q38 : What are polymorphic relations in laravel ?
+Q39 : What are observers ?

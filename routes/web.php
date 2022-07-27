@@ -22,15 +22,16 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    $user = User::find(1);
-    Admin::find(1)->notify(new PaymentProofUploaded($user));
-    Admin::find(2)->notify(new PaymentProofUploaded($user));
+    
     return view('welcome');
 });
 
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
 // })->middleware('auth')->name('verification.notice');
+Route::get('/markasred/{id}',[PaymentController::class,'markasred'])->name('markasred');
+Route::get('/redall',[PaymentController::class,'redall'])->name('redall');
+Route::get('/admin/notifications',[PaymentController::class,'notifications'])->name('paymentNotifications');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

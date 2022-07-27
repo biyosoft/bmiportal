@@ -420,6 +420,8 @@
     }
   </script>
   <!-- Github buttons -->
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+      </script>
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('soft-theme/assets/js/soft-ui-dashboard.min.js?v=1.0.9')}}"></script>

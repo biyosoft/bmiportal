@@ -92,7 +92,6 @@
       <div class="dataTable-bottom">
         <div class="dataTable-pagination">
             <ul class="dataTable-pagination-list m-4">
-              <li>{{$payments->links()}}</li>
             </ul>
         </div>
       </div>

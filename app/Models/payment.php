@@ -9,6 +9,6 @@ class payment extends Model
 {
     use HasFactory;
     public function invoice(){
-        return $this->belongsTo(payment::class);
+        return $this->belongsTo(invoice::class);
     }
 }

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\invoice;
 use App\Models\payment;
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use App\Notifications\PaymentProofUploaded; 
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -17,7 +22,7 @@ class PaymentController extends Controller
     {
         $invoices = invoice::all();
         $payments = payment::all();
-        return view('payments.index', ['payments' => payment::paginate(5)], compact('payments','invoices'));
+        return view('payments.index', ['payments' => payment::paginate(10)], compact('payments','invoices'));
     }
 
     /**
@@ -75,7 +80,7 @@ class PaymentController extends Controller
         $payments = new payment();
         $invoices = invoice::find($id);
         $payments->invoice = $invoices->invoiceId;
-        $payments->invoice_id = $request->input('invoice_id');
+        // $payments->invoice_id = $request->input('invoice_id');
         $payments->amount = $invoices->amount;
         $payments->due_date = $invoices->date;
         $payments->payment_date = $request->input('payment_date');
@@ -86,7 +91,12 @@ class PaymentController extends Controller
                 $files = $filename; 
             $payments->proof = $files;
        }
-       $payments->save();
+       $invoices->payment()->save($payments);
+       $payments = payment::where('invoice_id',$invoices->id)->latest('created_at')->first();
+       $user=Auth()->user();
+       $admins = Admin::all();
+        Notification::send($admins, new PaymentProofUploaded($user,$invoices,$payments));
+    //    Admin::all()->notify(new PaymentProofUploaded($user));
        return redirect()->back()
        ->with('success','The New Payment Is Added');
     }
@@ -144,5 +154,27 @@ class PaymentController extends Controller
       $headers = ['Content-Type: application/pdf'];
      return response()->download($filePath, $fileName, $headers);
 
+    }
+
+    public function markasred($id){
+        if($id){
+            Auth::guard('admin')->user()->notifications->where('id',$id)->markAsRead();
+        }
+        $msg = Auth::guard('admin')->user()->unreadNotifications->count() ;
+        return response()->json(array('msg'=> $msg), 200);
+    }
+
+    public function redall(){
+        $notifiable_user = Auth::guard('admin')->user();
+        $notifiable_user->unreadNotifications->markAsRead();
+        return back();
+    }
+
+    public function notifications(){
+        $user=Auth::guard('admin')->user();
+        $notifications = $user->notifications;
+        $read_notifications = $user->readNotifications;
+        $unread_notifications = $user->unreadNotifications;
+        return view('notifications',compact('read_notifications','unread_notifications','notifications'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,20 @@ use Illuminate\Notifications\Notification;
 class PaymentProofUploaded extends Notification
 {
     use Queueable;
+    public $user;
+    public $invoices;
+    public $payments;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user,$invoices,$payments)
     {
         $this->user = $user;
+        $this->invoices = $invoices;
+        $this->payments = $payments;
     }
 
     /**
@@ -29,7 +35,7 @@ class PaymentProofUploaded extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','broadcast'];
+        return ['database'];
     }
 
     /**
@@ -54,10 +60,14 @@ class PaymentProofUploaded extends Notification
      */
     public function toArray($notifiable)
     {
+        
         return [
-            'message' => 'Payment Proof Is uploaded !',
-            'user' =>$this->user->name,
-            'admin' =>  $notifiable
+            'user_name' =>$this->user->name,
+            'user_id' => $this->user->id,
+            'admin' =>  $notifiable,
+            'invoice_id' => $this->invoices->id ,
+            'payment_id' => $this->payments->id,
+            'invoice' => $this->invoices->invoiceId,
             
         ];
     }
