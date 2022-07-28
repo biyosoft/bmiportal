@@ -64,7 +64,14 @@ Route::middleware('admin')->group(function () {
 
 Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
 Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');
-Route::resource("invoices",'invoiceController');
+Route::post('invoices',[invoiceController::class,'index'])->name('invoices.index');
+Route::get('invoices',[invoiceController::class,'index']);
+Route::get('show',[invoiceController::class,'show'])->name('invoices.show');
+Route::post('store',[invoiceController::class,'store'])->name('invoices.store');
+Route::get('edit',[invoiceController::class,'edit'])->name('invoices.edit');
+Route::get('destroy',[invoiceController::class,'destroy'])->name('invoices.destroy');
+Route::get('create',[invoiceController::class,'create'])->name('invoices.create');
+
 Route::match(['get','post'],'/bulk-invoices',[fileController::class,'bulkInvoices'])->name('bulk-invoices');
 Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
 Route::resource('files','fileController');

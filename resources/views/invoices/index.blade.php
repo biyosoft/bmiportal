@@ -1,6 +1,17 @@
 @extends('layouts.main1')
 @section('content')
+<?php
+  // print_r($invoices);die;
+?>
 <link rel="stylesheet" type="text/css" href="{{ url('/css/pagination_style.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url('/css/filter_style.css') }}" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
 <nav class="navbar navbar-main navbar-expand-lg px-0 shadow-none border-radius-xl">
    <div class="container-fluid py-1 px-3">
    <nav aria-label="breadcrumb">
@@ -23,6 +34,43 @@
             {{session('error')}}
         </div>
     @endif
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+          <button class="collapsed btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fa fa-filter"></i>
+            Filter
+          </button>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <form action="{{route('invoices.index')}}" method="POST">
+          <div class="accordion-body row">
+
+              @csrf
+              <div class="col-3">
+                <select style="width: 100%;" name="user_ids[]" class="multi-select form-select" multiple="multiple">
+                  {{-- <option selected> -- Select -- </option> --}}
+                  <?php
+                    $users = get_all_users();
+                  ?>
+                  @foreach($users as $user)
+                    <option value={{$user->id}}>{{$user->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-3">
+                <input type="text" name="invoice_no" class="form-control" placeholder="invoice no">
+              </div>
+              <div class="col-3">
+                <input class="form-control" name="date" type="text" id="datepicker" placeholder="Date">
+              </div>
+              <div class="button-row d-flex">
+                <button style="margin-right: 8%" class="btn bg-gradient-dark ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
+            </div>
+        </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
   <div class="table-responsive">
     <div class="dataTable-wrapper dataTable-loading no-footer sortable fixed-height fixed-columns">
       <div class="dataTable-top">
@@ -47,7 +95,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs text-secondary mb-0">{{$invoice->user->name}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$invoice->name}}</p>
                       </div>
                     </div>
                   </td>
@@ -73,7 +121,7 @@
                     </div>
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$invoice->created_at ?  $invoice->created_at->diffForHumans() : 'N/A'}}</span>
+                    <span class="text-secondary text-xs font-weight-bold">{{$invoice->created_at ?  $invoice->created_at : 'N/A'}}</span>
                   </td>
                   <td class="align-middle">
                   <div class="dropdown" >
@@ -113,5 +161,19 @@
     </div>
   </div>
 </div>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".multi-select").select2();
+    $(".selection").addClass('form-control');
+    $(".selection").css("padding","2px");
+    $(".select2-selection").addClass('form-select');
+    $(".select2-selection").css({"border":"none", "padding":"0px"});  
+  });
+    // $(".select2-selection").css("padding", "0px");});
+</script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+</script>
 @endsection
