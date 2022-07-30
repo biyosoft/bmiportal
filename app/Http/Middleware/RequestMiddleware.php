@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\customerController;
+use Illuminate\Support\Facades\Auth;
+
 class RequestMiddleware
 {
     /**
@@ -17,13 +19,14 @@ class RequestMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $users = User::all();
-        if($users->form_status = 1 ){
+        $id = Auth::user()->id;
+        $users = User::find($id);
+        if($users->form_status == 1 ){
             session()->flash('error','Waiting For Approval');
             return redirect()->route('profile');
 
         }
-        else if($users->form_status = 0){
+        else if($users->form_status == 0){
             session()->flash('success','Please Complete The Profile !');
             return redirect()->route('profile');
            

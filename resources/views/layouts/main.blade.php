@@ -38,7 +38,7 @@
         <div class="" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{route('dashboard')}}">
+                    <a class="nav-link  {{(request()->segment(1)=='dashboard') ? 'active' : '' }}" href="{{route('dashboard')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('profile')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a class="nav-link {{(request()->segment(1)=='profile') ? 'active' : '' }}" href="{{route('profile')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applicationsExample" class="nav-link collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#applicationsExample" class="nav-link {{(request()->segment(1)=='user_invoices') ? 'active' : '' }}" aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -98,10 +98,10 @@
                         </div>
                     <span class="nav-link-text ms-1">{{__('labels.invoices')}}</span>
                     </a>
-                        <div class="collapse" id="applicationsExample" style="">
+                        <div class="{{(request()->segment(1)=='user_invoices') ? '' : 'collapse' }}" id="applicationsExample" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('user_invoices')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='user_invoices') ? 'active' : '' }}" href="{{route('user_invoices')}}">
                                         <span class="sidenav-mini-icon">k</span>
                                         <span class="sidenav-normal">{{__('labels.view_invoice')}}</span>
                                     </a>
@@ -116,7 +116,7 @@
                         </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#applications" class="nav-link collapsed" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#applications" class="nav-link {{(request()->segment(1)=='payment') ? 'active' : '' }}" aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>settings</title>
@@ -135,10 +135,10 @@
                         </div>
                     <span class="nav-link-text ms-1">{{__('labels.payments')}}</span>
                     </a>
-                        <div class="collapse" id="applications" style="">
+                        <div class="{{(request()->segment(1)=='payment') ? '' : 'collapse' }}" id="applications" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="{{route('pays.index')}}">
+                                    <a class="nav-link {{(request()->segment(1)=='payment') ? 'active' : '' }}" href="{{route('pays.index')}}">
                                         <span class="sidenav-mini-icon">k</span>
                                         <span class="sidenav-normal">{{__('labels.view_payment')}}</span>
                                     </a>
@@ -168,20 +168,7 @@
   <script src="{{asset('soft-theme/assets/js/plugins/dragula/dragula.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/jkanban/jkanban.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/chartjs.min.js')}}"></script>
-  <script>
-    const links = document.querySelectorAll('.nav-link');
-    
-    if (links.length) {
-      links.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          links.forEach((link) => {
-              link.classList.remove('active');
-          });
-          link.classList.add('active');
-        });
-      });
-    }
-  </script>
+
   <script>
     
     var ctx1 = document.getElementById("chart-line-1").getContext("2d");

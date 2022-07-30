@@ -267,7 +267,6 @@
   @yield('scripts')
   
   @livewireScripts
-  @powerGridScripts
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{asset('soft-theme/assets/js/plugins/dragula/dragula.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/jkanban/jkanban.js')}}"></script>

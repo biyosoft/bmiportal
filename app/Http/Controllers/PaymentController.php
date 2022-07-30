@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Notifications\PaymentProofUploaded; 
 use App\Models\User;
+use App\Notifications\PaymentApproved;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,9 @@ class PaymentController extends Controller
         $payments = payment::find($id);
         $payments->status = 1 ;
         $payments->save();
+        $user=User::find();
+        $admin = Auth()->guard('admin')->user();
+        Notification::send($user, new PaymentApproved($admin));
         return redirect()->back()
         ->with('success','The Payment Has Been Approved');
     }

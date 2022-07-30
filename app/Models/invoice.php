@@ -16,7 +16,7 @@ class invoice extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(user::class)->withDefault();
     }
 
     public function payment(){
