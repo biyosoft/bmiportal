@@ -10,15 +10,17 @@ use Illuminate\Notifications\Notification;
 class NewInvoiceAdded extends Notification
 {
     use Queueable;
-
+    public $admin_user;
+    public $invoices ;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($admin_user,$invoices)
     {
-        //
+        $this->admin_user = $admin_user;
+        $this->invoices = $invoices;
     }
 
     /**
@@ -55,7 +57,10 @@ class NewInvoiceAdded extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'admin_id' => $this->admin_user->id,
+            'admin_name' => $this->admin_user->name,
+            'invoice_id' => $this->invoices->id,
+            'invoice_invoiceId' => $this->invoices->invoiceId,
         ];
     }
 }

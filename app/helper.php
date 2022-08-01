@@ -1,5 +1,5 @@
-<?php
 
+<?php
     use Illuminate\Support\Facades\DB;
 
     if (!function_exists('get_all_users')) {

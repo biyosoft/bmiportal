@@ -23,14 +23,14 @@
     </nav>
    </div>
 </nav>
-<div class="card">
+<div class="card card-body p-2">
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success text-white">
             {{session('success')}}
         </div>
     @endif
     @if(session('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-white">
             {{session('error')}}
         </div>
     @endif

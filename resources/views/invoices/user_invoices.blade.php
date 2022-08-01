@@ -33,7 +33,6 @@
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer Name</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice Id</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due Date</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Invoice Doc</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created at</th>
               <th class="text-secondary opacity-7">Actions</th>
@@ -63,13 +62,6 @@
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
                     <p class="text-xs text-secondary mb-0">{{$invoice->date}}</p>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex px-2 py-1">
-                  <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$invoice->invoice_doc}}</p>
                   </div>
                 </div>
               </td>

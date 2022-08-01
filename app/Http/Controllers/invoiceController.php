@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\invoice;
 use App\Models\User;
+use App\Notifications\NewInvoiceAdded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Session;
-
+use Illuminate\Support\Facades\Notification;
 use function GuzzleHttp\Promise\all;
 
 class invoiceController extends Controller
@@ -97,6 +98,11 @@ class invoiceController extends Controller
         }
         $invoices->amount = $request->input('amount');
         $invoices->save();
+        $id = $request->input('user_id');
+        $user = User::find($id);
+        $admin_user = Auth::guard('admin')->user();
+        $invoices = invoice::latest('created_at')->first();
+        Notification::send($user, new NewInvoiceAdded($admin_user,$invoices));
         return redirect()->route('invoices.index')->with('success','Invoice Has Been Added Succesfully !');
     }
 
@@ -106,8 +112,9 @@ class invoiceController extends Controller
      * @param  \App\Models\invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,invoice $invoice)
+    public function show(Request $request,$id)
     {
+        $invoice = invoice::find($id);
         return view('invoices.show',compact('invoice'));
     }
 
