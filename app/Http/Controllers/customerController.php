@@ -20,14 +20,14 @@ class customerController extends Controller
     public function index()
     {
         $users = User::select("*")
-        ->where("form_status",2)->get();
-        return view('customers.index', ['users' => User::paginate(5)], compact('users'));
+        ->where("form_status",2)->paginate(10);
+        return view('customers.index', compact('users'));
     }
 
     public function list()
     {
         $users = User::select("*")
-        ->where("form_status",1)->get();
+        ->where("form_status",1)->paginate(10);
         return view('customers.index',compact('users'));
     }
 

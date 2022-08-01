@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Notifications\PaymentApproved;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PaymentController extends Controller
 {
@@ -21,9 +24,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $invoices = invoice::all();
+        //$invoices = invoice::all();
         $payments = payment::all();
-        return view('payments.index', ['payments' => payment::paginate(10)], compact('payments','invoices'));
+        return view('payments.index', ['payments' => payment::paginate(10)], compact('payments'));
     }
 
     /**
@@ -53,12 +56,16 @@ class PaymentController extends Controller
 
     public function pending(){
         $payments = payment::all()->where('status',0);
-        return view('payments.pending_payments', ['payments' => payment::paginate(5)],compact('payments'));
+        $payments = $this->paginate($payments);
+        $payments->withpath(route('payments.pending'));
+        return view('payments.pending_payments',compact('payments', $payments));
     }
 
     public function approved(){
         $payments = payment::all()->where('status',1);
-        return view('payments.approved_payments', ['payments' => payment::paginate(5)],compact('payments'));
+        $payments = $this->paginate($payments);
+        $payments->withpath(route('payments.approved'));
+        return view('payments.approved_payments',compact('payments', $payments));
     }
 
     public function is_approved($id){
@@ -180,5 +187,14 @@ class PaymentController extends Controller
         $read_notifications = $user->readNotifications;
         $unread_notifications = $user->unreadNotifications;
         return view('notifications',compact('read_notifications','unread_notifications','notifications'));
+    }
+
+    public function paginate($items, $perPage = 10, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

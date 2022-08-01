@@ -41,13 +41,12 @@
             Filter
           </button>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <form action="{{route('invoices.index')}}" method="POST">
+            <form action="{{route('invoices.index')}}" method="GET">
           <div class="accordion-body row">
 
-              @csrf
               <div class="col-3">
-                <select style="width: 100%;" name="user_ids[]" class="multi-select form-select" multiple="multiple">
-                  {{-- <option selected> -- Select -- </option> --}}
+                <select style="width: 100%;" name="user_id" class="multi-select form-select">
+                  <option selected> -- Select -- </option>
                   <?php
                     $users = get_all_users();
                   ?>
@@ -60,11 +59,14 @@
                 <input type="text" name="invoice_no" class="form-control" placeholder="invoice no">
               </div>
               <div class="col-3">
-                <input class="form-control" name="date" type="text" id="datepicker" placeholder="Date">
+                <input class="form-control" name="date" type="date" placeholder="Date">
               </div>
+              @csrf
+
               <div class="button-row d-flex">
                 <button style="margin-right: 8%" class="btn bg-gradient-dark ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
             </div>
+            
         </div>
 
           </form>
@@ -95,7 +97,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs text-secondary mb-0">{{$invoice->name}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$invoice->user->name}}</p>
                       </div>
                     </div>
                   </td>
@@ -170,10 +172,5 @@
     $(".select2-selection").css({"border":"none", "padding":"0px"});  
   });
     // $(".select2-selection").css("padding", "0px");});
-</script>
-<script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
 </script>
 @endsection

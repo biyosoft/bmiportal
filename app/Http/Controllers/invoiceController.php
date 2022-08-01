@@ -22,50 +22,35 @@ class invoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $where_users = "";
-        $where_invoiceId = "";
-        $where_invoiceId = "";
+        $user_id = $request->input('user_id');
+        $invoice_no = $request->input('invoice_no');
+        $date = $request->input('date');
 
-
-        if (!empty($request->input('user_ids'))) {
-            $user_ids = $request->input('user_ids');
-            $string = implode("','", $user_ids);
-            $where_users = "WHERE invoices.user_id IN ('".$string."')";
-                // echo $where_users;die;
-        }
-
-        if (!empty($request->input('invoice_no'))) {
-            $invoice_no = $request->input('invoice_no');
-            if ($where_users == "") {
-                $where_invoiceId = "WHERE invoices.invoiceId = ".$invoice_no."";
-            }else{
-                $where_invoiceId = "and invoices.invoiceId = ".$invoice_no."";
-            }
-                // echo $where_invoiceId;die;   
-        }
-
-        if (!empty($request->input('date'))) {
-            $date = $request->input('date');
+        if (!empty($date)) {
             $date = date('Y-m-d', strtotime($date));
-            if ($where_users == "" || $where_invoiceId == "" ) {
-                $where_date = "WHERE invoices.created_at = '".$date."'";
-            }else{
-                $where_date = "and invoices.created_at = '".$date."'";
-            }
-            // echo $where_date;die;
         }else{
-            $where_date = "";
+            $date = "";
         }
-                // echo $where_users.' / '.$where_invoiceId.' / '.$where_date;die;
-        if ($where_users == "" && $where_invoiceId == "" && $where_date == "") {
-            $query = "select * from invoices LEFT JOIN users ON invoices.user_id = users.id;";
-        }else{
-            $query = "select * from invoices LEFT JOIN users ON invoices.user_id = users.id ${where_users} ${where_invoiceId} ${where_date}";
+        // echo $user_id.' / '.$invoice_no.' / '.$date;die;
+
+        // if (!empty($user_id) && empty($invoice_no) && empty($date)) {
+        //     $invoices = invoice::Where([
+        //         'user_id' => $user_id, 
+        //     ])->paginate(2)->appends(['user_id'=> $user_id]);
+        // }elseif(!empty($user_id) && !empty($invoice_no) && empty($date)){
+        //     // echo 'a';die;
+        //     $invoices = invoice::Where([
+        //         'user_id' => $user_id,
+        //         'invoiceId' => $invoice_no,
+        //     ])->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no]);
+        // }
+        if(!empty($user_id) || !empty($invoice_no) || !empty($date)){
+            $invoices = invoice::Where('user_id', $user_id)->orWhere('invoiceId', $invoice_no)->orWhere('created_at', $date)->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no, 'created_at' => $date]);
         }
-            //    print_r($query);die;  
-        $invoices = DB::select($query);
-        $invoices = $this->paginate($invoices);
-        $invoices->withPath('http://localhost/bmiportal/public/invoices');
+        else {
+            $invoices = invoice::paginate(2);
+        }
+
         return view('invoices.index', compact('invoices'));
     }   
     
@@ -75,7 +60,7 @@ class invoiceController extends Controller
         $user = Auth::user();
         // print_r($user->id);die;
         $invoices = invoice::where('user_id',1)->get();
-        return view('invoices.user_invoices', ['invoices' => invoice::paginate(5)],compact('invoices'));
+        return view('invoices.user_invoices', ['invoices' => invoice::paginate(10)],compact('invoices'));
     }
 
     /**
@@ -207,13 +192,4 @@ class invoiceController extends Controller
         return redirect()->route('invoices.index')->with('error','Invoice Has Been Deleted  !');
     }
 
-    public function paginate($items, $perPage = 2, $page = null)
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $total = count($items);
-        $currentpage = $page;
-        $offset = ($currentpage * $perPage) - $perPage ;
-        $itemstoshow = array_slice($items , $offset , $perPage);
-        return new LengthAwarePaginator($itemstoshow ,$total ,$perPage);
-    }
 }

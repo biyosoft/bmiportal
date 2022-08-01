@@ -39,16 +39,16 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($payments as $payments)
+            @foreach($payments as $payment)
             <tr>
                 <td>
-                <p class="text-xs font-weight-bold mb-0 text-center">{{$payments->id}}</p>
+                <p class="text-xs font-weight-bold mb-0 text-center">{{$payment->id}}</p>
                 </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
                     <p class="text-xs text-secondary mb-0">
-                      <a style="color:#009fe3;" href="{{route('show_user_invoice',$payments->invoice_id)}}">{{$payments->invoice}}</a>
+                      <a style="color:#009fe3;" href="{{route('show_user_invoice',$payment->invoice_id)}}">{{$payment->invoice}}</a>
                     </p>
                   </div>
                 </div>
@@ -56,33 +56,33 @@
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payments->amount}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->amount}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payments->due_Date}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->due_Date}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payments->payment_date}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->payment_date}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payments->proof}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->proof}}</p>
                   </div>
                 </div>
               </td>
               <td class="align-middle text-center">
-              <span class="badge badge-sm {{$payments->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payments->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
+              <span class="badge badge-sm {{$payment->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payment->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
               </td>
             </tr>
             @endforeach
@@ -92,6 +92,7 @@
       <div class="dataTable-bottom">
         <div class="dataTable-pagination">
             <ul class="dataTable-pagination-list m-4">
+              <li>{{$payments->links()}}</li>
             </ul>
         </div>
       </div>
