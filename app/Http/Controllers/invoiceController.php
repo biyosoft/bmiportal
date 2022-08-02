@@ -46,8 +46,7 @@ class invoiceController extends Controller
         //     ])->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no]);
         // }
         if(!empty($user_id) || !empty($invoice_no) || !empty($date)){
-            $invocies = invoice::where(['user_id', $user_id ,'invoiceId', $invoice_no , 'created_at', $date])
-            ->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no, 'created_at' => $date]);
+            $invoices = invoice::where('user_id', $user_id)->orWhere('invoiceId', $invoice_no)->orWhere('created_at', $date)->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no, 'created_at' => $date]);
         }
         else {
             $invoices = invoice::paginate(2);
