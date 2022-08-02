@@ -64,15 +64,15 @@
                 @if(isset($user->unreadnotifications))
                 <div id="unread-notifications" class="row justify-content-center mt-2">
                   <div class="col" style="margin-left: 75px;">
-                    <a href="" class="btn bg-light btn-sm text-xs px-3  ">Read All</a>
-                    <a href="" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
+                    <a href="{{route('user.redall')}}" class="btn bg-light btn-sm text-xs px-3  ">Read All</a>
+                    <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
                   </div>
                 </div>
                 @else
                 <div id="read-notifications">
                   <p>No New Notifications !</p>
                   <div class="p-2">
-                    <a href="" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
+                    <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
                   </div>
                 </div>
                 @endif
@@ -443,7 +443,7 @@
   </footer>
 </div>
 @endsection
-@section('scripts')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const unreadnotificationscount = '<?php echo count($user->unreadnotifications) ?>';
@@ -461,7 +461,7 @@
       //  const ul = li.parent();
       $.ajax({
         type: 'GET',
-        url: '/markasred/' + id,
+        url: 'user/markasred/' + id,
         data: '_token = <?php echo csrf_token() ?>',
         success: function(data) {
           li.remove();
@@ -482,4 +482,3 @@
   });
 </script>
 <script src="{{asset('soft-theme/assets/js/plugins/fullcalendar.min.js')}}"></script>
-@endsection

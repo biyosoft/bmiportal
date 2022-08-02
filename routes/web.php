@@ -1,9 +1,11 @@
 <?php
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserNotificationController;
 use App\Models\Admin;
 use App\Models\payment;
 use App\Models\User;
@@ -31,9 +33,9 @@ Route::get('/', function () {
 // })->middleware('auth')->name('verification.notice');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth','request'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth','request'])->name('dashboard');
 
 require __DIR__.'/auth.php';
         
@@ -59,18 +61,44 @@ require __DIR__.'/auth.php';
         Route::resource("admins", 'adminController');
 
         //Routes For Admin Side Notifications
-
-        Route::get('/markasred/{id}',[PaymentController::class,'markasred'])->name('markasred');
-        Route::get('/redall',[PaymentController::class,'redall'])->name('redall');
-        Route::get('/admin/notifications',[PaymentController::class,'notifications'])->name('paymentNotifications');
-
+        
+        Route::get('/markasred/{id}',[AdminNotificationController::class,'markasred'])->name('markasred');
+        Route::get('/redall',[AdminNotificationController::class,'redall'])->name('redall');
+        Route::get('/admin/notifications',[AdminNotificationController::class,'notifications'])->name('paymentNotifications');
+        
         //Payments routes for admin side payment actions 
-
+        
         Route::get('payments/pending',[PaymentController::class,'pending'])->name('payments.pending');
         Route::get('payments/approved',[PaymentController::class,'approved'])->name('payments.approved');
         Route::get('/payment/is_approved/{id}',[PaymentController::class,'is_approved'])->name('payments.is_approved');
     });
 
+    //Route for  Customer Profile
+
+    Route::middleware('auth')->group(function(){
+
+        //Routes FOr the customer and invoice controller
+
+        Route::get('/profile',[customerController::class,'profile'])->name('profile');
+        Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
+        Route::get("user_invoices",'invoiceController@user_invoices')->name('user_invoices');
+        Route::get("show_user_invoice/{id}",'invoiceController@show_user_invoice')->name('show_user_invoice');
+
+        //Routes For User Side Notificaitons
+
+        Route::get('user/markasred/{id}',[UserNotificationController::class,'markasred'])->name('user.markasred');
+        Route::get('user/redall',[UserNotificationController::class,'redall'])->name('user.redall');
+        Route::get('user/admin/notifications',[UserNotificationController::class,'notifications'])->name('user.paymentNotifications');
+
+        //Routes for customer sides payment actions
+        Route::match(['get','post'],'/payment/create/{id}',[PaymentController::class,'create1'])->name('payments.create1');
+        Route::get('/payment',[PaymentController::class,'index'])->name('pays.index');
+        Route::post('/payment/store/{id}',[PaymentController::class,'store'])->name('pays.store');
+        Route::get('/payments/download/{id}',[PaymentController::class,'download'])->name('payments.download');
+        Route::get('/payment/show/{payment}',[PaymentController::class,'show'])->name('payment.show');
+
+    });
+    
     Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
     Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');
     Route::match(['get','post'],'invoices',[invoiceController::class,'index'])->name('invoices.index');
@@ -86,21 +114,8 @@ require __DIR__.'/auth.php';
     Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
     Route::resource('files','fileController');
 
-    //Routes for customer sides payment actions
-    Route::match(['get','post'],'/payment/create/{id}',[PaymentController::class,'create1'])->name('payments.create1');
-    Route::get('/payment',[PaymentController::class,'index'])->name('pays.index');
-    Route::post('/payment/store/{id}',[PaymentController::class,'store'])->name('pays.store');
-    Route::get('/payments/download/{id}',[PaymentController::class,'download'])->name('payments.download');
-    Route::get('/payment/show/{payment}',[PaymentController::class,'show'])->name('payment.show');
+   
 
-    //Route for  Customer Profile
-    Route::middleware('auth')->group(function(){
-        //Routes FOr the customer and invoice controller
-        Route::get('/profile',[customerController::class,'profile'])->name('profile');
-        Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
-        Route::get("user_invoices",'invoiceController@user_invoices')->name('user_invoices');
-        Route::get("show_user_invoice/{id}",'invoiceController@show_user_invoice')->name('show_user_invoice');
-    });
 
 
 

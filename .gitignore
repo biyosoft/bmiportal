@@ -13,5 +13,12 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+<<<<<<< Updated upstream
 *.docx
 *.png
+=======
+*.png
+*.txt
+*.docx
+>>>>>>> Stashed changes
+*.xlsx

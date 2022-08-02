@@ -441,7 +441,6 @@
   </footer>
 </div>
 @endsection
-@section('scripts')
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const unreadnotificationscount = '<?php echo count($admin->unreadnotifications) ?>';
@@ -480,4 +479,3 @@
   });
 </script>
 <script src="{{asset('soft-theme/assets/js/plugins/fullcalendar.min.js')}}"></script>
-@endsection
