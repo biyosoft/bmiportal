@@ -56,24 +56,16 @@ class PaymentController extends Controller
 
     public function pending(){
         $payments = payment::all()->where('status',0);
-<<<<<<< Updated upstream
         $payments = $this->paginate($payments);
         $payments->withpath(route('payments.pending'));
         return view('payments.pending_payments',compact('payments', $payments));
-=======
-        return view('payments.pending_payments',compact('payments'));
->>>>>>> Stashed changes
     }
 
     public function approved(){
         $payments = payment::all()->where('status',1);
-<<<<<<< Updated upstream
         $payments = $this->paginate($payments);
         $payments->withpath(route('payments.approved'));
         return view('payments.approved_payments',compact('payments', $payments));
-=======
-        return view('payments.approved_payments',compact('payments'));
->>>>>>> Stashed changes
     }
 
     public function is_approved($id){
@@ -197,7 +189,7 @@ class PaymentController extends Controller
         return view('notifications',compact('read_notifications','unread_notifications','notifications'));
     }
 
-    public function paginate($items, $perPage = 10, $page = null, $options = [])
+    public function paginate($items, $perPage = 1, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 
