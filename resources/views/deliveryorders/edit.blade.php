@@ -7,8 +7,8 @@
    <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Invoices</li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Add Invoice</li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Delivery Order</li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit Delivery Order</li>
         </ol>
     </nav>
    </div>
@@ -19,7 +19,7 @@
     <div class="col-12 col-lg-10">
     <div class="card">
         <div class="card-body">
-            <h5 class="font-weight-bolder mb-0">Edit invoice</h5>
+            <h5 class="font-weight-bolder mb-0">Edit Delivery Order</h5>
             <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
             &nbsp;
             <span class="text-success">
@@ -30,10 +30,11 @@
 
             </p>
             <hr class="horizontal dark mt-2">
-            <!-- invoice add form started here  -->
-            <form action="{{route('invoices.update',$invoice->id)}}" method="POST" enctype="multipart/form-data">
+            <!-- deliveryOrder add form started here  -->
+            <form action="{{route('deliveryOrders.update',$deliveryOrder->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
+                <input type="hidden" name="invoice_id" value="{{$deliveryOrder->invoice_id}}">
             <!-- company and name fields  -->
                 <div class="row">
                     <div class="col-md-6">
@@ -42,7 +43,7 @@
                             <select name="user_id" class="form-control multi-select">
                                 <option value=""></option>
                                 @foreach($users as $user)
-                                 <option value="{{$user->id}}"  @if($invoice->user_id == $user->id) selected @endif>{{$user->name}}</option>
+                                 <option value="{{$user->id}}"  @if($deliveryOrder->user_id == $user->id) selected @endif>{{$user->name}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">@error('user_id') {{$message}} @enderror</span>
@@ -50,47 +51,37 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="invocieId">{{__('labels.invoice_no')}}</label>
-                            <input type="text" value="{{$invoice->invoiceId}}" class="form-control" name="invoiceId" required>
-                            <span class="text-danger">@error('invoiceId') {{$message}} @enderror</span>
+                            <label for="invocieId">{{__('labels.do_no')}}</label>
+                            <input type="text" value="{{$deliveryOrder->do_no}}" class="form-control" name="do_no" required>
+                            <span class="text-danger">@error('deliveryOrderId') {{$message}} @enderror</span>
 
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="date">{{__('labels.due_date')}}</label>
-                            <input type="date" value="{{$invoice->date}}" class="form-control" name="date" required>
+                            <input type="date" value="{{$deliveryOrder->date}}" class="form-control" name="date" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
                     </div>
-            <!-- email and invoice fields  -->
+            <!-- email and deliveryOrder fields  -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="invoice_doc">{{__('labels.invoice_doc')}}</label>
-                            <input type="file" class="form-control file" value="{{$invoice->invoice_doc}}" name="file" required accept=".pdf,.doc,.xlsx,.docx">
+                            <label for="deliveryOrder_doc">{{__('labels.do_doc')}}</label>
+                            <input type="file" class="form-control file" value="{{$deliveryOrder->do_doc}}" name="file" required accept=".pdf,.doc,.xlsx,.docx">
                             <span id="file_prepopulate"></span>
                             <span   class="text-danger text-sm ">@error('file') {{$message}} @enderror</span>
 
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="amount">{{__('labels.amount')}}</label>
-                            <input type="amount" 
-                            class="form-control" 
-                            value="{{$invoice->amount}}"
-                            name="amount" required>
-                            <span   class="text-danger text-sm ">@error('amount') {{$message}} @enderror</span>
-                        </div>
-                    </div>
                 </div>
-            <!-- amount and invoice ends  -->
+            <!-- amount and deliveryOrder ends  -->
                 
             <!-- Add  Button  -->
                 <div class="button-row d-flex ">
                     <button class="btn bg-gradient-info ms-auto mb-0 js-btn-next" 
-                    type="submit">Update invoice</button>
+                    type="submit">Update DO</button>
                 </div>
 
 
@@ -105,7 +96,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
-        var a = "<?= $invoice->invoice_doc; ?>";
+        var a = "<?= $deliveryOrder->do_doc; ?>";
         if (a) {
             $('.file').attr("required", false);
         }

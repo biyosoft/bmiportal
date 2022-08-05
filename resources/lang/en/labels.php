@@ -31,5 +31,19 @@ return [
     'add_payment' => 'Add Payment' ,
     'payments_all' => 'All Payments',
     'payments' => 'Payments',
-    'proof' => 'Proof Document'
+    'proof' => 'Proof Document',
+    'delivery_order' => 'Delivery Order',
+    'all_delivery_orders' => 'All Delivery Orders',
+    'create_delivery_orders' => 'Delivery Order',
+    'delivery_order' => 'Delivery Order',
+    'add_delivery_order' => 'Add Delivery Order',
+    'view_delivery_order' => 'View Delivery Order',
+    'do_doc' => 'DO Document',
+    'do_no' => 'DO Number',
+    'upload_do' => 'Upload Multiple DO',
+    'upload_delivery_order' => 'Upload Delivery Order',
+    'upload_delivery_orders' => 'Upload Delivery Orders',
+
+
+
 ];

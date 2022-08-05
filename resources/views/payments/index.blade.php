@@ -29,7 +29,7 @@
         <table class="table align-items-center mb-0">
           <thead>
             <tr>
-              <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+              <!-- <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th> -->
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('invoice_no')}}</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due Date</th>
@@ -41,9 +41,9 @@
           <tbody>
             @foreach($payments as $payment)
             <tr>
-                <td>
+                <!-- <td>
                 <p class="text-xs font-weight-bold mb-0 text-center">{{$payment->id}}</p>
-                </td>
+                </td> -->
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
@@ -56,7 +56,7 @@
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->amount}}</p>
+                    <p class="text-xs text-secondary mb-0">RM {{$payment->amount}}</p>
                   </div>
                 </div>
               </td>

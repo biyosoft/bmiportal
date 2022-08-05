@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class payment extends Model
 {
     use HasFactory;
+    protected $dates= ['due_Date','payment_date'];
     public function invoice(){
         return $this->belongsTo(invoice::class)->withDefault();
     }

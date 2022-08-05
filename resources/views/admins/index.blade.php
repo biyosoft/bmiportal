@@ -19,18 +19,18 @@
         <table class="table align-items-center mb-0">
           <thead>
             <tr>
-              <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
+              <!-- <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th> -->
+              <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Name</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Created At</th>
               <th class="text-secondary opacity-7">Actions</th>
             </tr>
           </thead>
           <tbody>
             @foreach($admins as $admin)
             <tr>
-                <td>
+                <!-- <td>
                 <p class="text-xs font-weight-bold mb-0 text-center">{{$admin->id}}</p>
-                </td>
+                </td> -->
               <td>
                 <div class="d-flex px-2 py-1">
                   <!-- <div>
@@ -42,7 +42,7 @@
                   </div>
                 </div>
               </td>
-              <td class="align-middle text-center">
+              <td class="">
                 <span class="text-secondary text-xs font-weight-bold">{{$admin->created_at ?  $admin->created_at->diffForHumans() : 'N/A'}}</span>
               </td>
               <td class="align-middle">

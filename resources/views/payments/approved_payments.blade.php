@@ -29,20 +29,20 @@
         <table class="table align-items-center mb-0">
           <thead>
             <tr>
-              <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('invoice_no')}}</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Due Date</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment Date</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+              <!-- <th class="text-uppercase  text-secondary text-xxs font-weight-bolder opacity-7">ID</th> -->
+              <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">{{__('invoice_no')}}</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Due Date</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Payment Date</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Amount</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Status</th>
             </tr>
           </thead>
           <tbody>
             @foreach($payments as $payment)
             <tr>
-                <td>
-                <p class="text-xs font-weight-bold mb-0 text-center">{{$payment->id}}</p>
-                </td>
+                <!-- <td>
+                <p class="text-xs font-weight-bold mb-0 ">{{$payment->id}}</p>
+                </td> -->
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
@@ -53,26 +53,26 @@
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->amount}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->due_Date->format("d/m/y")}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->due_Date}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->payment_date->format("d/m/y")}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->payment_date}}</p>
+                    <p class="text-xs text-secondary mb-0">RM {{$payment->amount}}</p>
                   </div>
                 </div>
               </td>
-              <td class="align-middle text-center">
-              <span class="badge badge-sm {{$payment->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payment->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
+              <td class="align-middle ">
+                <span class="badge badge-sm {{$payment->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$payment->status == 0 ? 'Pending Approval' : 'Approved'}}</span>
               </td>
             </tr>
             @endforeach

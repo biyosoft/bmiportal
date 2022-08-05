@@ -35,21 +35,21 @@
         <table class="table align-items-center mb-0">
           <thead>
             <tr>
-              <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Company</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
-              <th class="text-secondary opacity-7">Actions</th>
+              <!-- <th class="text-uppercase  text-secondary text-xxs font-weight-bolder opacity-7">ID</th> -->
+              <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Name</th>
+              <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ps-2">Company</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Status</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Phone</th>
+              <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Created At</th>
+              <th class="text-dark opacity-7">Actions</th>
             </tr>
           </thead>
           <tbody>
             @foreach($users as $user)
             <tr>
-                <td>
-                  <p class="text-xs font-weight-bold mb-0 text-center">{{$user->id}}</p>
-                </td>
+                <!-- <td>
+                  <p class="text-xs font-weight-bold mb-0 ">{{$user->id}}</p>
+                </td> -->
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
@@ -61,20 +61,20 @@
               <td>
                 <p class="text-xs font-weight-bold mb-0">{{$user->company}}</p>
               </td>
-              <td class="align-middle text-center text-sm">
+              <td class="align-middle  text-sm">
                 <span class="badge badge-sm {{$user->status == 0 ? 'badge-secondary' : 'badge-success'}}">{{$user->status == 0 ? 'Inactive' : 'Active'}}</span>
               </td>
               <td>
                 <p class="text-xs font-weight-bold mb-0">{{$user->phone}}</p>
               </td>
               
-              <td class="align-middle text-center">
+              <td class="align-middle ">
                 <span class="text-secondary text-xs font-weight-bold">{{$user->created_at->diffForHumans()}}</span>
               </td>
               
               <td class="align-middle" >
                 <div class="dropdown" >
-                  <button class="btn btn-dark bg-gradient btn-sm mt-3 " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn bg-gradient-info btn-sm mt-3 " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg style="fill: white;" width="15px" height="15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"/></svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

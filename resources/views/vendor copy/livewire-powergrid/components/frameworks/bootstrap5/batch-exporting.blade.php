@@ -11,7 +11,7 @@
     @if($batchFinished)
         <div class="my-3">
             <p>
-                <button class="btn btn-primary"
+                <button class="btn bg-gradient-info"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseCompleted"

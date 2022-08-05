@@ -2,6 +2,7 @@
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\PaymentController;
@@ -104,7 +105,7 @@ require __DIR__.'/auth.php';
     Route::match(['get','post'],'invoices',[invoiceController::class,'index'])->name('invoices.index');
     Route::post('invoices/filters',[invoiceController::class,'filters'])->name('invoices.filters');
     Route::get('invoices',[invoiceController::class,'index'])->name('invoices.index');
-    Route::get('create',[invoiceController::class,'create'])->name('invoices.create');
+    Route::get('invoices/create',[invoiceController::class,'create'])->name('invoices.create');
     Route::post('store',[invoiceController::class,'store'])->name('invoices.store');
     Route::get('invoices/show/{id}',[invoiceController::class,'show'])->name('invoices.show');
     Route::get('invoices/edit/{id}',[invoiceController::class,'edit'])->name('invoices.edit');
@@ -114,6 +115,13 @@ require __DIR__.'/auth.php';
     Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');
     Route::resource('files','fileController');
 
+
+    //Routes For The Delivery Orders
+    Route::get('/deliveryOrders/upload',[DeliveryOrderController::class,'upload'])->name('deliveryOrder.upload');
+    Route::post('/deliveryOrders/upload1',[DeliveryOrderController::class,'upload1'])->name('deliveryOrder.upload1');
+    Route::get('/deliveryOrders/bulkUpload',[DeliveryOrderController::class,'bulkUpload'])->name('deliveryOrder.bulkUpload');
+    Route::get('/deliveryOrders/download/{id}',[DeliveryOrderController::class,'download'])->name('deliveryOrder.download');
+    Route::resource('deliveryOrders','DeliveryOrderController');
    
 
 

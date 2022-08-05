@@ -39,7 +39,7 @@
                     @endforeach
                        <div class="row">
                         <div class="col">
-                        <a style="float: right;" href="{{route('redall')}}"  class="btn btn-dark">Read All</a>
+                        <a style="float: right;" href="{{route('redall')}}"  class="btn bg-gradient-info">Read All</a>
                         </div>
                        </div>
                         

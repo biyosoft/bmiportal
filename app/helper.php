@@ -11,4 +11,8 @@
         }
     }
 
+    if(!function_exists('thousandSeparator')){
+        
+    }
+
 ?>
