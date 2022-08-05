@@ -1,3 +1,11 @@
 .btn.filter-btn{
     margin-left: 15px !important;
 }
+.filter-border{
+    position: relative;
+    border: 2px solid #f5f7ff !important;
+    /* border-bottom: none !important; */
+    padding: 1rem 1rem 2rem 1rem;
+    margin-bottom: -1.25rem;
+    margin: 20px;
+}

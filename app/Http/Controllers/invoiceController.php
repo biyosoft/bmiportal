@@ -24,7 +24,7 @@ class invoiceController extends Controller
     public function index(Request $request)
     {
         $user_id = $request->input('user_id');
-        $invoice_no = $request->input('invoice_no');
+        $invoiceId = $request->input('invoiceId');
         $date = $request->input('date');
 
         if (!empty($date)) {
@@ -45,8 +45,11 @@ class invoiceController extends Controller
         //         'invoiceId' => $invoice_no,
         //     ])->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no]);
         // }
-        if(!empty($user_id) || !empty($invoice_no) || !empty($date)){
-            $invoices = invoice::where('user_id', $user_id)->orWhere('invoiceId', $invoice_no)->orWhere('created_at', $date)->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no, 'created_at' => $date]);
+        if(!empty($user_id) || !empty($invoiceId) || !empty($date)){
+            $invoices = invoice::where('user_id', 'like', '%'.$user_id.'%')
+            ->where('invoiceId', 'like', '%'.$invoiceId.'%')
+            ->where('date', 'like', '%'.$date.'%')->paginate(2)
+            ->appends(['user_id'=> $user_id, 'invoiceId' => $invoiceId, 'date' => $date]);
         }
         else {
             $invoices = invoice::paginate(2);

@@ -40,36 +40,42 @@
             <i class="fa fa-filter"></i>
             Filter
           </button>
-        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div id="collapseOne" class="accordion-collapse collapse filter-border" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <form action="{{route('invoices.index')}}" method="GET">
-          <div class="accordion-body row">
-
-              <div class="col-3">
-                <select style="width: 100%;" name="user_id" class="multi-select form-select">
-                  <option selected> -- Select -- </option>
-                  <?php
-                    $users = get_all_users();
-                  ?>
-                  @foreach($users as $user)
-                    <option value={{$user->id}}>{{$user->name}}</option>
-                  @endforeach
-                </select>
+              {{-- <div class="row"></div> --}}
+              <div class="accordion-body row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="select">Customer</label>
+                    <select name="user_id" class="form-control select" id="select">
+                      <?php
+                        $users = get_all_users();
+                      ?>
+                      @foreach($users as $user)
+                        <option value={{$user->id}}>{{$user->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="text-input" class="form-control-label">Invoice ID</label>
+                    <input type="text" name="invoiceId" value="{{ app('request')->input('invoiceId') }}" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="datepicker" class="form-control-label">Due Date</label>
+                    <input class="form-control" value="{{ app('request')->input('date') }}" name="date" type="date">
+                  </div>
+                </div>
+                  @csrf
               </div>
-              <div class="col-3">
-                <input type="text" name="invoice_no" class="form-control" placeholder="invoice no">
-              </div>
-              <div class="col-3">
-                <input class="form-control" name="date" type="date" placeholder="Date">
-              </div>
-              @csrf
-
-              <div class="button-row d-flex">
-                <button style="margin-right: 8%" class="btn bg-gradient-dark ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
-            </div>
-            
-        </div>
-
-          </form>
+                  <div class="button-row d-flex">
+                    <button style="margin-right: 8%" class="btn bg-gradient-dark ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
+                </div>            
+              
+            </form>
         </div>
       </div>
     </div>
@@ -163,14 +169,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $(".multi-select").select2();
-    $(".selection").addClass('form-control');
-    $(".selection").css("padding","2px");
-    $(".select2-selection").addClass('form-select');
-    $(".select2-selection").css({"border":"none", "padding":"0px"});  
-  });
-    // $(".select2-selection").css("padding", "0px");});
+<script>
+  $('select option[value={{ app('request')->input('user_id') }}]').attr("selected",true);
 </script>
 @endsection
