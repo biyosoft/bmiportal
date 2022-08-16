@@ -51,9 +51,8 @@
                         </div>
                     </div>
                 </div>
-            <!-- email and password fields  -->
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
+                <div class="row">
+                <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
                             <input value="{{$users->email}}" type="email" class="form-control" name="email" required>
@@ -63,27 +62,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="password">Password</label>
-                            <input type="password" 
-                            class="form-control" 
-                            name="password" required>
-                            <span   class="text-danger text-sm ">@error('password') {{$message}} @enderror</span>
+                            <label for="payment_term">{{__('labels.payment_term')}}</label>
+                            <input value="{{$users->payment_term}}" type="text" class="form-control" name="payment_term">
                         </div>
                     </div>
                 </div>
+            <!-- email and password fields  -->
             <!-- password repeat and status fields  -->
                 <div class="row ">
-                    <div class="col-md-6">
+                    
+                <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="password">Repeat Password</label>
-                            <input type="password" 
-                            id="password_confirmation"
-                             class="form-control"
-                              name="password_confirmation" required>
-                            <span   class="text-danger text-sm ">@error('password_confirmation') {{$message}} @enderror</span>
+                            <label for="phone">{{__('labels.phone')}}</label>
+                            <input value="{{$users->phone}}" type="text" class="form-control" name="phone">
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="status">Status</label>
@@ -95,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                
             <!-- Add Customer Button  -->
                 <div class="button-row d-flex ">
                     <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" 

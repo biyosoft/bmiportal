@@ -68,7 +68,7 @@
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$invoice->amount}}</p>
+                    <p class="text-xs text-secondary mb-0">RM {{convert_currency($invoice->amount)}}</p>
                   </div>
                 </div>
               </td>

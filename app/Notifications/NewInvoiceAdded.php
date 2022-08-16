@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class NewInvoiceAdded extends Notification
 {
@@ -31,7 +32,7 @@ class NewInvoiceAdded extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -42,10 +43,11 @@ class NewInvoiceAdded extends Notification
      */
     public function toMail($notifiable)
     {
+        $invoice_id = $this->invoices->id;
+        $admin_id = $this->admin_user->id;
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        
+                    ->line(new HtmlString('Invoice '.'<a href="http://bmiportal.com/invoices/show/'.$invoice_id.'">'.$this->invoices->invoiceId.'</a>'.' has been added by '.'<b>'.$this->admin_user->name.'</b>' ));
     }
 
     /**

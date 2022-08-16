@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Session;
+use App\Exports\InvoiceExport;
+use Excel;
 use Illuminate\Support\Facades\Notification;
+use Symfony\Component\Console\Input\Input;
+
 use function GuzzleHttp\Promise\all;
 
 class invoiceController extends Controller
@@ -23,37 +27,34 @@ class invoiceController extends Controller
      */
     public function index(Request $request)
     {
+        
         $user_id = $request->input('user_id');
         $invoiceId = $request->input('invoiceId');
         $date = $request->input('date');
 
         if (!empty($date)) {
             $date = date('Y-m-d', strtotime($date));
+            
         }else{
             $date = "";
         }
-        // echo $user_id.' / '.$invoice_no.' / '.$date;die;
 
-        // if (!empty($user_id) && empty($invoice_no) && empty($date)) {
-        //     $invoices = invoice::Where([
-        //         'user_id' => $user_id, 
-        //     ])->paginate(2)->appends(['user_id'=> $user_id]);
-        // }elseif(!empty($user_id) && !empty($invoice_no) && empty($date)){
-        //     // echo 'a';die;
-        //     $invoices = invoice::Where([
-        //         'user_id' => $user_id,
-        //         'invoiceId' => $invoice_no,
-        //     ])->paginate(2)->appends(['user_id'=> $user_id, 'invoiceId' => $invoice_no]);
-        // }
-        if(!empty($user_id) || !empty($invoiceId) || !empty($date)){
-            $invoices = invoice::where('user_id', 'like', '%'.$user_id.'%')
-            ->where('invoiceId', 'like', '%'.$invoiceId.'%')
-            ->where('date', 'like', '%'.$date.'%')->paginate(2)
-            ->appends(['user_id'=> $user_id, 'invoiceId' => $invoiceId, 'date' => $date]);
+        if($request){
+            if(!empty($user_id) || !empty($invoiceId) || !empty($date)){
+                $invoices = invoice::where('user_id', 'like', '%'.$user_id.'%')
+                ->where('invoiceId', 'like', '%'.$invoiceId.'%')
+                ->where('date', 'like', '%'.$date.'%')->paginate(4)
+                ->appends(['user_id'=> $user_id, 'invoiceId' => $invoiceId, 'date' => $date]);
+            }
+            else {
+                $invoices = invoice::paginate(4);
+            }
+            
         }
-        else {
-            $invoices = invoice::paginate(2);
+        elseif($request==1){
+            return Excel::download(new InvoiceExport($user_id,$invoiceId,$date),'invoicelist.xlsx');
         }
+        
 
         return view('invoices.index', compact('invoices'));
     }   
@@ -75,6 +76,7 @@ class invoiceController extends Controller
     public function create()
     {
         $users = User::all();
+
         return view('invoices.create',compact('users'));
     }
 
@@ -92,6 +94,7 @@ class invoiceController extends Controller
         $invoices->user_id = $request->input('user_id');
         $invoices->invoiceId = $request->input('invoiceId');
         $invoices->date = $request->input('date');
+        $invoices->invoice_date = $request->input('invoice_date');
         if (!empty($request->file)) {
              $file = $request->file;
                     $filename = time().'-'.$file->getClientOriginalName();  
@@ -129,6 +132,7 @@ class invoiceController extends Controller
         return view('invoices.show_user_invoice',compact('invoice'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -153,6 +157,7 @@ class invoiceController extends Controller
         $invoices = invoice::find($id);
         $invoices->user_id = $request->input('user_id');
         $invoices->date = $request->input('date');
+        $invoices->invoice_date = $request->input('invoice_date');
         if (!empty($request->file)) {
              $file = $request->file;
                     $filename = time().'-'.$file->getClientOriginalName();  
@@ -202,4 +207,12 @@ class invoiceController extends Controller
         return redirect()->route('invoices.index')->with('error','Invoice Has Been Deleted  !');
     }
 
+
+    public function exportIntoExcel(){
+        return Excel::download(new InvoiceExport,'invoicelist.xlsx');
+    }
+
+    public function exportIntoCSV(){
+        return Excel::download(new InvoiceExport,'invoicelist.csv'); 
+    }
 }

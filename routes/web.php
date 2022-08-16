@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Notifications\PaymentProofUploaded;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\invoice;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -99,7 +100,8 @@ require __DIR__.'/auth.php';
         Route::get('/payment/show/{payment}',[PaymentController::class,'show'])->name('payment.show');
 
     });
-    
+    Route::get('invoices-excel',[invoiceController::class,'exportIntoExcel'])->name('invoices.excel');
+    Route::get('invoices-csv',[invoiceController::class,'exportIntoCSV'])->name('invoice.csv');
     Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
     Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');
     Route::match(['get','post'],'invoices',[invoiceController::class,'index'])->name('invoices.index');
@@ -108,8 +110,8 @@ require __DIR__.'/auth.php';
     Route::get('invoices/create',[invoiceController::class,'create'])->name('invoices.create');
     Route::post('store',[invoiceController::class,'store'])->name('invoices.store');
     Route::get('invoices/show/{id}',[invoiceController::class,'show'])->name('invoices.show');
-    Route::get('invoices/edit/{id}',[invoiceController::class,'edit'])->name('invoices.edit');
-    Route::put('update',[invoiceController::class,'update'])->name('invoices.update');
+    Route::get('invoices/edit/{invoice}',[invoiceController::class,'edit'])->name('invoices.edit');
+    Route::put('invoices/update/{invoice}',[invoiceController::class,'update'])->name('invoices.update');
     Route::delete('destroy',[invoiceController::class,'destroy'])->name('invoices.destroy');
     Route::match(['get','post'],'/bulk-invoices',[fileController::class,'bulkInvoices'])->name('bulk-invoices');
     Route::post('invoice/bulkUpload',[fileController::class,'bulkUpload'])->name('invoices.bulkUpload');

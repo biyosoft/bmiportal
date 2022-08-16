@@ -32,14 +32,16 @@
             <form action="{{route('invoices.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <!-- company and name fields  -->
+       
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="customer">Customer</label>
-                            <select name="user_id" class="form-control">
-                                <option value=""></option>
+                            <select id="user_id" name="user_id" class="form-control">
+                                <option value="">Select Customer</option>
                                 @foreach($users as $user)
                                  <option value="{{$user->id}}">{{$user->name}}</option>
+                                 <input id="pt" type="hidden" value="{{$user->payment_term}}">
                                 @endforeach
                             </select>
                             <span class="text-danger">@error('user_id') {{$message}} @enderror</span>
@@ -57,8 +59,17 @@
 
                     <div class="col-md-6">
                         <div class="form-group mb-3">
+                            <label for="date">Invoice Date</label>
+                            <input id="invoiceDate"  type="date" class="form-control" name="invoice_date" required>
+                            <span class="text-danger">@error('invoice_date') {{$message}} @enderror</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
                             <label for="date">Due Date</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input  id="dueDate" type="date" class="form-control" name="date" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
@@ -75,12 +86,11 @@
                         </div>
                     </div>
                     
-                </div>
-                <div class="row">
+                
                 <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="amount">Amount</label>
-                            <input type="amount" 
+                            <input id="amount" type="amount" 
                             class="form-control" 
                             name="amount" required>
                             <span   class="text-danger text-sm ">@error('amount') {{$message}} @enderror</span>
@@ -95,7 +105,7 @@
                     type="submit">Add invoice</button>
                 </div>
 
-
+                
                 
             </form>
         </div>
@@ -103,4 +113,23 @@
     </div>
    </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    var user = {};
+    $(document).ready(function(){ 
+        $('#user_id').change( function() {
+            $(this).find(":selected").each(function () {
+                user.userId = $('#pt').val();
+            });
+        });
+    $('#invoiceDate').change(function() {
+        invoiceDate = new Date($('#invoiceDate').val());
+        output_f=new Date(invoiceDate.setDate(invoiceDate.getDate()+user.userId)).toISOString().split('.');
+        output_s = output_f[0].split('T');
+        $('#dueDate').val(output_s[0]);
+    });
+});
+</script>
+
 @endsection

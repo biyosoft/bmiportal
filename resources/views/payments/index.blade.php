@@ -56,21 +56,21 @@
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">RM {{$payment->amount}}</p>
+                    <p class="text-xs text-secondary mb-0">RM {{convert_currency($payment->amount)}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->due_Date}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->due_Date->format('m/d/y')}}</p>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex px-2 py-1">
                   <div class="d-flex flex-column justify-content-center">
-                    <p class="text-xs text-secondary mb-0">{{$payment->payment_date}}</p>
+                    <p class="text-xs text-secondary mb-0">{{$payment->payment_date->format('m/d/y')}}</p>
                   </div>
                 </div>
               </td>

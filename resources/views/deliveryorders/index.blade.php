@@ -69,7 +69,8 @@
                   <!-- <th style="display: none;" class="text-uppercase  text-dark text-xxs font-weight-bolder opacity-7">ID</th> -->
                   <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Customer Name</th>
                   <!-- <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Due Date</th> -->
-                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">DO No</th>
+                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">{{__('labels.do_no')}}</th>
+                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">{{__('labels.invoice_no')}}</th>
                   <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Created at</th>
                   <th class="text-dark opacity-7">Actions</th>
                 </tr>
@@ -98,6 +99,13 @@
                     <div class="mx-3">
                       <div class="flex-column ">
                         <p class="text-xs text-secondary mb-0">{{$deliveryorder->do_no}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="mx-3">
+                      <div class="flex-column ">
+                        <p class="text-xs text-secondary mb-0"><a href="{{route('invoices.show',$deliveryorder->invoice->id)}}" class="text-info">{{$deliveryorder->invoice->invoiceId}}</a></p>
                       </div>
                     </div>
                   </td>

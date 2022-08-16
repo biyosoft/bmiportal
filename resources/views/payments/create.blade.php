@@ -43,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="name">Amount</label>
-                            <input value="{{$invoices->amount}}" type="text" class="form-control" name="amount" required disabled>
+                            <input value="{{convert_currency($invoices->amount)}}" type="text" class="form-control" name="amount" required disabled>
                             <span class="text-danger">@error('amount') {{$message}} @enderror</span>
 
                         </div>

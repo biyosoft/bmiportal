@@ -26,6 +26,7 @@ return [
     'add_admin' => 'Add Admin',
     'invoice_doc' => 'Invoice Document',
     'due_date' => 'Due Date',
+    'invoice_date' => 'Invoice Date',
     'amount' => 'Amount',
     'view_payment' => 'View Payments' ,
     'add_payment' => 'Add Payment' ,
@@ -39,10 +40,14 @@ return [
     'add_delivery_order' => 'Add Delivery Order',
     'view_delivery_order' => 'View Delivery Order',
     'do_doc' => 'DO Document',
-    'do_no' => 'DO Number',
+    'do_no' => 'DO Number', 
+    'invoice_no' => 'Invoice Number', 
     'upload_do' => 'Upload Multiple DO',
     'upload_delivery_order' => 'Upload Delivery Order',
     'upload_delivery_orders' => 'Upload Delivery Orders',
+    'payment_term' => 'Payment Term',
+    'phone' => 'Phone',
+
 
 
 

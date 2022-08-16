@@ -58,8 +58,17 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
+                            <label for="date">{{__('labels.invoice_date')}}</label>
+                            <input id="invoiceDate" value="{{$invoice->invoice_date}}"  type="date" class="form-control" name="invoice_date" required>
+                            <span class="text-danger">@error('invoice_date') {{$message}} @enderror</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
                             <label for="date">{{__('labels.due_date')}}</label>
-                            <input type="date" value="{{$invoice->date}}" class="form-control" name="date" required>
+                            <input id="dueDate" type="date" value="{{$invoice->date}}" class="form-control" name="date" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
@@ -123,3 +132,13 @@
     //  $(".select2-selection").css("padding", "0px");});
 </script>
 @endsection
+<script>
+    $(document).ready(function(){ 
+    $('#invoiceDate').change(function() {
+        invoiceDate = new Date($('#invoiceDate').val());
+        output_f=new Date(invoiceDate.setDate(invoiceDate.getDate()+60)).toISOString().split('.');
+        output_s = output_f[0].split('T');
+        $('#dueDate').val(output_s[0]);
+    });
+});
+</script>

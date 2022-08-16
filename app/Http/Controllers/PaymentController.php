@@ -101,7 +101,7 @@ class PaymentController extends Controller
                 $file->move(public_path('payments'), $filename);
                 $files = $filename; 
             $payments->proof = $files;
-       }
+       } 
        $invoices->payment()->save($payments);
        $payments = payment::where('invoice_id',$invoices->id)->latest('created_at')->first();
        $user=Auth()->user();

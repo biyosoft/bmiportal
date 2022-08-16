@@ -39,8 +39,8 @@
                     </div>
                     
                     <div class="col-md-6">
-                        <b>Invoice No</b>
-                        <p>{{$deliveryOrder->invoice_id}}</p>
+                        <b>{{__('labels.invoice_no')}}</b>
+                        <p><a class="text-info" href="{{route('invoices.show',$deliveryOrder->invoice->id)}}">{{$deliveryOrder->invoice->invoiceId}}</a></p>
                     </div>
                     <div class="col-md-6">
                         <b>Due Date</b>
@@ -49,7 +49,11 @@
                 </div>
                 <div class="row">
                 <div class="col">
-                        <a href="{{route('deliveryOrder.download',$deliveryOrder->id)}}"  class="btn  bg-gradient-dark btn-sm align-middle mt-1" type="submit">{{$deliveryOrder->do_doc}}</a>
+                    <b>DO Document</b>
+                    <p><a class="text-info"
+                    href="{{route('deliveryOrder.download',$deliveryOrder->id)}}">
+                    {{$deliveryOrder->do_doc}}</a></p>
+                        
                     </div>
                 </div>
             </div>

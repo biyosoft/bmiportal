@@ -31,17 +31,22 @@
     @endif
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
-          <button class="collapsed btn bg-gradient-info ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <button name="searchFilter" class="collapsed btn bg-gradient-info ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             <i class="fa fa-filter"></i>
             Filter
           </button>
+          <button name="exportFilter" 
+          class=" btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" 
+          type="button" onclick="$('#form1').submit();" >
+            Export
+          </button>
         <div id="collapseOne" class="accordion-collapse collapse filter-border" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <form action="{{route('invoices.index')}}" method="GET">
+            <form id="form1" action="{{route('invoices.index')}}" method="GET">
           <div class="accordion-body row">
 
               <div class="col-3">
                 <select  style="width: 100%;" name="user_id" class="multi-select form-select">
-                  <option selected> -- Select -- </option>
+                <option value="" disabled selected>Select User</option>
                   <?php
                     $users = get_all_users();
                   ?>
@@ -51,7 +56,7 @@
                 </select>
               </div>
               <div class="col-3">
-                <input type="text" name="invoice_no" class="form-control" placeholder="invoice no">
+                <input type="text" name="invoiceId" class="form-control" placeholder="invoice no">
               </div>
               <div class="col-3">
                 <input class="form-control" name="date" type="date" placeholder="Date">
@@ -76,7 +81,8 @@
                 <tr>
                   <th style="display: none;" class="text-uppercase  text-dark text-xxs font-weight-bolder opacity-7">ID</th>
                   <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Customer Name</th>
-                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Invoice Id</th>
+                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">{{__('labels.invoice_no')}}</th>
+                  <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">{{__('labels.do_no')}}</th>
                   <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Due Date</th>
                   <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Amount</th>
                   <th class=" text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Created at</th>
@@ -106,6 +112,13 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
+                        <p class="text-xs text-secondary mb-0">{{$invoice->deliveryOrder ? $invoice->deliveryOrder->do_no : 'N/A'}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
                         <p class="text-xs text-secondary mb-0">{{$invoice->date->format("m/d/Y")}}</p>
                       </div>
                     </div>
@@ -113,7 +126,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs text-secondary mb-0">RM {{$invoice->amount}}</p>
+                        <p class="text-xs text-secondary mb-0">RM {{ convert_currency($invoice->amount)}}</p>
                       </div>
                     </div>
                   </td>

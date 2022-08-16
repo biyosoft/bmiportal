@@ -103,7 +103,15 @@ class customerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::find($id);
+        $users->name = $request->input('name');
+        $users->email = $request->input('email');
+        $users->company = $request->input('company');
+        $users->payment_term = $request->input('payment_term');
+        $users->phone = $request->input('phone');
+        $users->status = $request->input('status');
+        $users->save();
+        return back()->with('success' , 'Customer Has Been Updated Successfully');
     }
 
     /**

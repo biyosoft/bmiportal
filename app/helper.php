@@ -11,8 +11,10 @@
         }
     }
 
-    if(!function_exists('thousandSeparator')){
-        
+    if(!function_exists('convert_currency')){
+     function convert_currency($value){
+            return number_format($value,2);
+     }
     }
 
 ?>

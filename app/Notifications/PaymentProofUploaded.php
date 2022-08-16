@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class PaymentProofUploaded extends Notification
 {
@@ -35,7 +36,7 @@ class PaymentProofUploaded extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -46,10 +47,10 @@ class PaymentProofUploaded extends Notification
      */
     public function toMail($notifiable)
     {
+        $customer = $this->user->id;
+        $invoice = $this->invoices->id;
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line(new HtmlString('<b>'.$this->user->name.'</b>'.' has uploaded the '.'<b>'.'Payment Proof'.'</b>'.' to invoice '.'<a href="http://bmiportal.com/show_user_invoice/'.$invoice.'">'.$this->invoices->id.'</a>'));
     }
 
     /**

@@ -47,7 +47,7 @@
                     </div>
                     <div class="col">
                         <b>Amount</b>
-                        <p>{{$invoice[0]->amount}}</p>
+                        <p>{{convert_currency($invoice[0]->amount)}}</p>
                     </div>
                 </div>
             </div>
