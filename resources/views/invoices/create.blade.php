@@ -41,7 +41,7 @@
                                 <option value="">Select Customer</option>
                                 @foreach($users as $user)
                                  <option value="{{$user->id}}">{{$user->name}}</option>
-                                 <input id="pt" type="hidden" value="{{$user->payment_term}}">
+                                 {{-- <input id="pt" type="hidden" value="{{$user->payment_term}}"> --}}
                                 @endforeach
                             </select>
                             <span class="text-danger">@error('user_id') {{$message}} @enderror</span>
