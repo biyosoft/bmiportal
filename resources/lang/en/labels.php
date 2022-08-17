@@ -47,6 +47,19 @@ return [
     'upload_delivery_orders' => 'Upload Delivery Orders',
     'payment_term' => 'Payment Term',
     'phone' => 'Phone',
+    'dn' => 'Debit Note',
+    'cn' => 'Credit Note',
+    'view_dn' => 'View Debit Note',
+    'add_dn' => 'Add Debit Note',
+    'view_cn' => 'View Credit Note',
+    'add_cn' => 'Add Credit Note',
+    'update_cn' => 'Update Credit Note',
+    'update_dn' => 'Update Debit Note',
+    'cn_date' => 'CN Date',
+    'dn_date' => 'DN Date',
+    'cn_no' => 'CN Number',
+    'dn_no' => 'DN Number',
+    'do' => 'Delivery Order',
 
 
 

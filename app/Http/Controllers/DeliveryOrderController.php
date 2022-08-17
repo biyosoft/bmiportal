@@ -25,7 +25,10 @@ class DeliveryOrderController extends Controller
             $date = "";
         }
         if(!empty($user_id) || !empty($do_no) ){
-            $deliveryorders = DeliveryOrder::where('user_id', $user_id)->where('do_no', $do_no)->paginate(2)->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
+            $deliveryorders = DeliveryOrder::where('user_id','like','%'.$user_id.'%')
+            ->where('do_no','like','%'. $do_no . '%')
+            ->paginate(2)
+            ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
         }
         else {
             $deliveryorders = DeliveryOrder::paginate(2);

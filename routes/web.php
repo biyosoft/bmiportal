@@ -1,7 +1,9 @@
 <?php
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\AdminNotificationController;
+use App\Http\Controllers\CreditNoteController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\DebitNoteController;
 use App\Http\Controllers\DeliveryOrderController;
 use App\Http\Controllers\fileController;
 use App\Http\Controllers\invoiceController;
@@ -73,6 +75,11 @@ require __DIR__.'/auth.php';
         Route::get('payments/pending',[PaymentController::class,'pending'])->name('payments.pending');
         Route::get('payments/approved',[PaymentController::class,'approved'])->name('payments.approved');
         Route::get('/payment/is_approved/{id}',[PaymentController::class,'is_approved'])->name('payments.is_approved');
+
+        //Routes for the credit notes
+
+        Route::resource('creditnotes','CreditNoteController');
+        Route::resource('debitnotes','DebitNoteController');
     });
 
     //Route for  Customer Profile
