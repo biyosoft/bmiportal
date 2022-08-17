@@ -1,6 +1,8 @@
 @extends('layouts.main1')
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ url('/css/pagination_style.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url('/css/filter_style.css') }}" />
+
 <style>
   .table-responsive{
     min-height: 300px;
@@ -29,6 +31,59 @@
       {{session('error')}}
     </div>
     @endif
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+          <button class="collapsed btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fa fa-filter"></i>
+            Filter
+          </button>
+        <div id="collapseOne" class="accordion-collapse collapse filter-border" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <form action="{{route('customers.index')}}" method="GET">
+              {{-- <div class="row"></div> --}}
+              <div class="accordion-body row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Name</label>
+                    <input class="form-control" name="name" type="text" id="example-text-input">
+                </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Company</label>
+                    <input class="form-control" name="company" type="text" id="example-text-input">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="example-email-input" class="form-control-label">Email</label>
+                    <input class="form-control" name="email" type="email" id="example-text-input">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-tel-input" class="form-control-label">Phone</label>
+                    <input class="form-control" name="phone" type="tel" id="example-text-input">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Status</label>
+                    <select class="form-control" name="status" id="exampleFormControlSelect1">
+                      <option>Active</option>
+                      <option>Inactive</option>
+                    </select>
+                  </div>
+                </div>
+                  @csrf
+              </div>
+                  <div class="button-row d-flex">
+                    <button style="margin-right: 8%" class="btn bg-gradient-dark ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
+                </div>            
+              
+            </form>
+        </div>
+      </div>
+    </div>
   <div class="table-responsive">
     <div class="dataTable-wrapper dataTable-loading no-footer sortable fixed-height fixed-columns">
       <div class="dataTable-top">
@@ -106,7 +161,7 @@
       <div class="dataTable-bottom">
         <div class="dataTable-pagination">
             <ul class="dataTable-pagination-list m-4">
-              
+              <li>{{ $users->links() }}</li>
             </ul>
         </div>
       </div>
