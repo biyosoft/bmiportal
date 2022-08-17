@@ -32,8 +32,8 @@
     </div>
     @endif
     <div class="accordion" id="accordionExample">
-      <div class="accordion-item">
-          <button class="collapsed btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <div class="accordion-item"> 
+          <button name="searchFilter" class="collapsed btn bg-gradient-info ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             <i class="fa fa-filter"></i>
             Filter
           </button>
