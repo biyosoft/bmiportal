@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class customerController extends Controller
 {
@@ -143,15 +144,23 @@ class customerController extends Controller
 
     public function change_password_api(Request $request)
     {
-        // $new_pass = "";
-        // $reapeat_new_pass = "";die;
+        $customerId = Auth::user()->id;
+        $user = User::find($customerId);
+        $existing_pass = $request->existing_pass;
         $new_pass = $request->new_pass;
         $reapeat_new_pass = $request->repeat_new_pass;
         // echo $new_pass.' = '.$reapeat_new_pass;die;
         if ($new_pass != $reapeat_new_pass) {
             return back()->with('error','New pass and repeat new pass does not match');
         }else{
-            return back()->with('success','Successfullt Password Changed');
+            if(Hash::check($existing_pass, $user->password)){
+                // return "User found";
+                $user->password = Hash::make($request->new_pass);
+                $user->save();
+                return back()->with('success','Successfullt Password Changed');
+            }else{
+                return back()->with('error','Please input correct old password');
+            }
         }
     }
     

@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">New Password</label>
-                                    <input type="text" value="" class="form-control" name="new_pass" required>
+                                    <input type="password" value="" class="form-control" name="new_pass" required>
                                     <span class="text-danger text-sm ">@error('email') {{$message}} @enderror</span>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="">Repeat New Password</label>
-                                    <input type="text" value="" class="form-control" name="repeat_new_pass" required>
+                                    <input type="password" value="" class="form-control" name="repeat_new_pass" required>
                                     <span class="text-danger text-sm ">@error('email') {{$message}} @enderror</span>
                                 </div>
                             </div>
