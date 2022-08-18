@@ -13,7 +13,7 @@
     </nav>
    </div>
 </nav>
-<div class="card card-body mx-5 py-4">
+<div class="card card-body mx-1 py-4">
     @if(session('success'))
         <div class="alert alert-success text-white" style="max-width: 300px;">
             {{session('success')}}

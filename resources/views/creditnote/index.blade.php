@@ -13,7 +13,7 @@
     </nav>
    </div>
 </nav>
-<div class="card card-body mx-5 py-4">
+<div class="card card-body mx-1 py-4">
     @if(session('success'))
         <div class="alert alert-success text-white" style="max-width: 300px;">
             {{session('success')}}
@@ -119,7 +119,7 @@
                   <td>
                     <div class="mx-3">
                       <div class="flex-column ">
-                        <p class="text-xs text-secondary mb-0">{{$creditnote->payment_term->format('d/m/y')}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$creditnote->payment_term->format('d/m/y ')}}</p>
                       </div>
                     </div>
                   </td>
