@@ -134,6 +134,26 @@ class customerController extends Controller
         return view('profile',compact('users'));
     }
 
+    public function change_password(Request $request)
+    {
+        $customerId = Auth::user()->id;
+        $users = User::find($customerId);
+        return view('change_password',compact('users'));
+    }
+
+    public function change_password_api(Request $request)
+    {
+        // $new_pass = "";
+        // $reapeat_new_pass = "";die;
+        $new_pass = $request->new_pass;
+        $reapeat_new_pass = $request->repeat_new_pass;
+        // echo $new_pass.' = '.$reapeat_new_pass;die;
+        if ($new_pass != $reapeat_new_pass) {
+            return back()->with('error','New pass and repeat new pass does not match');
+        }else{
+            return back()->with('success','Successfullt Password Changed');
+        }
+    }
     
     /**
      * Store a newly created resource in storage.

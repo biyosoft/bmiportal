@@ -89,6 +89,9 @@ require __DIR__.'/auth.php';
         //Routes FOr the customer and invoice controller
 
         Route::get('/profile',[customerController::class,'profile'])->name('profile');
+        Route::get('/change_password',[customerController::class,'change_password'])->name('change_password');
+        Route::post('/change_password_api',[customerController::class,'change_password_api'])->name('change_password_api');
+
         Route::post('/customers/store1/{id}',[customerController::class,'store1'])->name('customers.store1');
         Route::get("user_invoices",'invoiceController@user_invoices')->name('user_invoices');
         Route::get("show_user_invoice/{id}",'invoiceController@show_user_invoice')->name('show_user_invoice');
