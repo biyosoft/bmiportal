@@ -15,7 +15,7 @@
   </div>
   <div class="col-md-6 ">
     <div class="mx-5 mt-3" style="float:right !important;">
-      <ul class="">
+      <ul class="d-flex">
         <li class="nav-item dropdown  d-flex align-items-center ">
           <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell cursor-pointer"></i>
@@ -72,12 +72,48 @@
             </div>
             @endif
           </ul>
+        </li>
+        <li class="nav-item px-1 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+              </a>
+            </li>
       </ul>
     </div>
   </div>
 </div>
 <hr class="horizontal dark mb-0 mt-0">
 <!-- End Navbar -->
+<div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+      <i class="fa fa-cog py-2"> </i>
+    </a>
+    <div class="card shadow-lg blur">
+      <div class="card-header pb-0 pt-3  bg-transparent ">
+        <div class="float-start">
+          <h5 class="mt-3 mb-0">Welcome !</h5>
+          <p>These are user profile settings</p>
+        </div>
+        <div class="float-end mt-4">
+          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+            <i class="fa fa-close"></i>
+          </button>
+        </div>
+        <!-- End Toggle Button -->
+      </div>
+      <hr class="horizontal dark my-1">
+      <div class="card-body pt-sm-3 pt-0">
+        <!-- Sidebar Backgrounds -->
+        <div>
+          <h6 class="mb-0">Configuartions : </h6>
+        </div>
+        <!-- Sidenav Type -->
+        <div class="mt-3">
+          <h6 class="mb-0">Change Password</h6>
+        </div>
+      </div>
+    </div>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
