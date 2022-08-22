@@ -16,7 +16,7 @@
   <div class="col-md-6 ">
     <div class="mx-5 mt-3" style="float:right !important;">
       <ul class="d-flex">
-      
+
         <li class="nav-item dropdown  d-flex align-items-center ">
           <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell cursor-pointer"></i>
@@ -58,64 +58,67 @@
             </li>
             @endforeach
             <hr>
-                @if(isset($user->unreadnotifications))
-                <div id="unread-notifications" class="row justify-content-center mt-2">
-                  <div class="col" style="margin-left: 75px;">
-                    <a href="{{route('user.redall')}}" class="btn bg-light btn-sm text-xs px-3  ">Read All</a>
-                    <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
-                  </div>
-                </div>
-                @else
-                <div id="read-notifications">
-                  <p>No New Notifications !</p>
-                  <div class="p-2">
-                    <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
-                  </div>
-                </div>
-                @endif
+            @if(isset($user->unreadnotifications))
+            <div id="unread-notifications" class="row justify-content-center mt-2">
+              <div class="col" style="margin-left: 75px;">
+                <a href="{{route('user.redall')}}" class="btn bg-light btn-sm text-xs px-3  ">Read All</a>
+                <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
+              </div>
+            </div>
+            @else
+            <div id="read-notifications">
+              <p>No New Notifications !</p>
+              <div class="p-2">
+                <a href="{{route('user.paymentNotifications')}}" class="btn bg-dark btn-sm text-xs px-3 mx-2 text-white">View All</a>
+              </div>
+            </div>
+            @endif
             @endif
           </ul>
         </li>
         <li class="nav-item px-1 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
-              </a>
-            </li>
+          <a href="javascript:;" class="nav-link text-body p-0">
+            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 <hr class="horizontal dark mb-0 mt-0">
 <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg blur">
-      <div class="card-header pb-0 pt-3  bg-transparent ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Welcome !</h5>
-          <p>These are user profile settings</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
+  <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+    <i class="fa fa-cog py-2"> </i>
+  </a>
+  <div class="card shadow-lg blur">
+    <div class="card-header pb-0 pt-3  bg-transparent ">
+      <div class="float-start">
+        <h5 class="mt-3 mb-0">Welcome !</h5>
+        <p>These are user profile settings</p>
       </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Configuartions : </h6>
-        </div>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
+      <div class="float-end mt-4">
+        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+      <!-- End Toggle Button -->
+    </div>
+    <hr class="horizontal dark my-1">
+    <div class="card-body pt-sm-3 pt-0">
+      <!-- Sidebar Backgrounds -->
+      <div>
+        <h6 class="mb-0">Configuartions : </h6>
+      </div>
+      <!-- Sidenav Type -->
+      <div class="mt-3">
+        <a class="nav-link {{(request()->segment(1)=='change_password') ? 'active' : '' }}" href="{{route('change_password')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <!-- <span class="nav-link-text ms-1">Change Password</span> -->
           <h6 class="mb-0">Change Password</h6>
-        </div>
+        </a>
       </div>
     </div>
   </div>
+</div>
 <!-- End Navbar -->
 
 <script>
@@ -127,7 +130,7 @@
       $('#read-notifications').hide();
     }
 
-    $('.clickenvelope').on('click',function(e){
+    $('.clickenvelope').on('click', function(e) {
       const par = $(e.target).closest('p');
       const id = par.find('.notification_id').val();
       const li = par.closest('li');
@@ -143,7 +146,7 @@
           if (ul.length == 0) {
             $('#read-notifications').show();
             $('#unread-notifications').hide();
-          }else{
+          } else {
             $('#read-notifications').hide();
             $('#unread-notifications').show();
           }

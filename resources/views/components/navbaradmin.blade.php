@@ -109,8 +109,11 @@
         </div>
         <!-- Sidenav Type -->
         <div class="mt-3">
+        <a class="nav-link {{(request()->segment(1)=='change_password_admin') ? 'active' : '' }}" href="{{route('change_password_admin')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <!-- <span class="nav-link-text ms-1">Change Password</span> -->
           <h6 class="mb-0">Change Password</h6>
-        </div>
+        </a>
+      </div>
       </div>
     </div>
 </div>
