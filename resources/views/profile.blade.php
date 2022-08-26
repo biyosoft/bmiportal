@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="font-weight-bolder mb-0">Profile</h5>
-                    <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    <p class="mb-0 text-sm">Edit your's profile here.
                         &nbsp;
                         @if(session('success'))
                         <span class="text-success">

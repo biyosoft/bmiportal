@@ -57,7 +57,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link {{(request()->segment(1)=='profile') ? 'active' : '' }}" href="{{route('profile')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -77,7 +77,7 @@
                         </div>
                     <span class="nav-link-text ms-1">Profile</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- <li class="nav-item">
                     <a class="nav-link {{(request()->segment(1)=='change_password') ? 'active' : '' }}" href="{{route('change_password')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
@@ -178,7 +178,7 @@
         </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-   @include('components.navbar');
+   @include('components.navbar')
     @yield('content')
   </main>
   <!--   Core JS Files   -->
