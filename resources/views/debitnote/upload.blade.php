@@ -5,8 +5,8 @@
    <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Invoices</li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Upload Invoices</li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">DN</li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Upload DN</li>
         </ol>
     </nav>
    </div>
@@ -15,29 +15,29 @@
    <div class="row">
         <div class="col-12 col-lg-10">
             <div class="card card-body">
-            <h5 class="font-weight-bolder mb-0">Upload Invoices</h5>
+            <h5 class="font-weight-bolder mb-0">{{__('labels.upload_dn')}}</h5>
             <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
             &nbsp;
-            <span class="text-success text-white" style="max-width: 300px;">
+            <span class="text-success">
             @if(session('success'))
             {{session('success')}}
             @endif
             </span>
             </p>
             <hr class="horizontal dark mt-2">
-            <form action="{{route('files.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('debitnote.bulkupload')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-2">
-                <input  id="file-upload" name="file[]" type="file" multiple />
+                <input name="file[]" type="file" multiple />
                 </div>
-                <label for="" class="mt-2">Upload Invoices</label>
-                <div action="/" class="form-control dropzone" onclick="document.querySelector('#file-upload').click()" >
+                <label for="" class="mt-2">{{__('labels.upload_delivery_orders')}}</label>
+                <div action="/" class="form-control dropzone" >
                 <div class="fallback" > 
                     
                 </div>
                 </div>
                 <div class="d-flex justify-content-end mt-4">
-                    <button type="submit" name="button" class="btn bg-gradient-info m-0 ms-2">Save Invoices</button>
+                    <button type="submit" name="button" class="btn bg-gradient-info m-0 ms-2">Save DN's</button>
                 </div>
             </form>
             
@@ -48,11 +48,11 @@
    </div>
 @endsection
 <script>
-    Dropzone.autoDiscover = true;
+    Dropzone.autoDiscover = false;
     var drop = document.getElementById('dropzone')
     var myDropzone = new Dropzone(drop, {
       url: "/file/post",
-      addRemoveLinks: true,
+      addRemoveLinks: true
 
     });
   </script>

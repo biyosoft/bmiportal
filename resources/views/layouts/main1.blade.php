@@ -179,6 +179,12 @@
                                         <span class="sidenav-normal">{{__('labels.add_dn')}}</span>
                                     </a>
                                 </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link {{(request()->segment(1)=='debitnote') && (request()->segment(2)=='upload')  ? 'active' : '' }}" href="{{route('debitnote.upload')}}">
+                                        <span class="sidenav-mini-icon">k</span>
+                                        <span class="sidenav-normal">{{__('labels.upload_dn')}}</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                 </li>
@@ -214,6 +220,12 @@
                                     <a class="nav-link {{(request()->segment(1)=='creditnotes') && (request()->segment(2)=='create')  ? 'active' : '' }}" href="{{route('creditnotes.create')}}">
                                         <span class="sidenav-mini-icon">k</span>
                                         <span class="sidenav-normal">{{__('labels.add_cn')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link {{(request()->segment(1)=='creditnote') && (request()->segment(2)=='upload')  ? 'active' : '' }}" href="{{route('creditnote.upload')}}">
+                                        <span class="sidenav-mini-icon">k</span>
+                                        <span class="sidenav-normal">{{__('labels.upload_cn')}}</span>
                                     </a>
                                 </li>
                             </ul>

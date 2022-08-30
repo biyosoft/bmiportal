@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreditNote;
 use App\Models\DeliveryOrder;
 use App\Models\User;
+use App\Models\invoice;
 use Illuminate\Http\Request;
 
 class CreditNoteController extends Controller
@@ -76,6 +77,52 @@ class CreditNoteController extends Controller
         $creditnotes = CreditNote::find($id);
         return view('creditnote.show',compact('creditnotes'));
     }
+
+
+    public function upload(){
+        $users = User::all();
+        return view('creditnote.upload',compact('users'));
+
+    }
+    public function bulkupload(Request $request){
+        $request->validate([
+            'file' => 'required',
+        ]);
+        $deliveryorders = DeliveryOrder::all();
+       $users = User::all();
+        $file = $request->file;
+         $files = count($request->file);
+         foreach($request->file as $file)
+            {
+                $name=time().'-'.$file->getClientOriginalName();  
+                $data[] = $name;  
+            }
+    return view('creditnote.bulkupload',compact('users','files','data','deliveryorders'));
+
+    }
+    public function upload1(Request $request){
+        $size = count($request->file);
+           for($i=0 ; $i<$size ; $i++)
+            {
+                $creditnotes = new CreditNote();
+                $creditnotes->user_id = $request->input('user_id')[$i];
+                $creditnotes->deliveryorder_id = $request->input('deliveryorder_id')[$i];
+                $creditnotes->cn_no = $request->input('cn_no')[$i];
+                $creditnotes->cn_date = $request->input('cn_date')[$i];
+                $creditnotes->payment_term = $request->input('payment_term')[$i];
+                if (!empty($request->file[$i])) {
+                    $file = $request->file[$i];
+                        $filename = time().'-'.$file->getClientOriginalName();  
+                    $file->move(public_path('documents'), $filename);
+                    $files = $filename; 
+                    $creditnotes->cn_doc = $files;
+                    }
+                $creditnotes->save();
+                
+            }
+            return redirect()->route('creditnotes.index')->with('success','CN Has Been Updated Succesfully !');
+    }
+
 
     /**
      * Show the form for editing the specified resource.

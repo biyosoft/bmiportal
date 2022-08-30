@@ -60,6 +60,8 @@ return [
     'cn_no' => 'CN Number',
     'dn_no' => 'DN Number',
     'do' => 'Delivery Order',
+    'upload_cn' => 'Upload Multiple CN',
+    'upload_dn' => 'Upload Multiple DN',
 
 
 

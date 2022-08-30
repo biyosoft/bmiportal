@@ -58,6 +58,7 @@ require __DIR__.'/auth.php';
     });
 
     Route::middleware('admin')->group(function () {
+        
         Route::delete('/customers/delete/{id}',[customerController::class,'delete'])->name('customers.delete');
         Route::put('/customers/formStatus/{id}',[customerController::class,'formStatus'])->name('customers.formStatus');
         Route::get('/customers/list',[customerController::class,'list'])->name('customers.list');
@@ -80,6 +81,21 @@ require __DIR__.'/auth.php';
 
         Route::resource('creditnotes','CreditNoteController');
         Route::resource('debitnotes','DebitNoteController');
+
+         //Routes for the debit note 
+
+        Route::get('/debitnote/upload',[DebitNoteController::class,'upload'])->name('debitnote.upload');
+        Route::match(['get','post'],'/debitnote/upload1',[DebitNoteController::class,'upload1'])->name('debitnote.upload1');
+        Route::match(['get','post'],'/debitnote/bulkupload',[DebitNoteController::class,'bulkupload'])->name('debitnote.bulkupload');
+        
+        //Routes for the credit note 
+        Route::get('/creditnote/upload',[CreditNoteController::class,'upload'])->name('creditnote.upload');
+        Route::match(['get','post'],'/creditnote/upload1',[CreditNoteController::class,'upload1'])->name('creditnote.upload1');
+        Route::match(['get','post'],'/creditnote/bulkupload',[CreditNoteController::class,'bulkupload'])->name('creditnote.bulkupload');
+
+    
+
+
     });
 
     //Route for  Customer Profile
@@ -134,9 +150,9 @@ require __DIR__.'/auth.php';
     Route::get('/deliveryOrders/bulkUpload',[DeliveryOrderController::class,'bulkUpload'])->name('deliveryOrder.bulkUpload');
     Route::get('/deliveryOrders/download/{id}',[DeliveryOrderController::class,'download'])->name('deliveryOrder.download');
     Route::resource('deliveryOrders','DeliveryOrderController');
+
+
    
-
-
 
 
 
