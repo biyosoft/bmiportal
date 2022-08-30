@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main1')
 @section('content')
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
     <div class="container-fluid py-1 px-3">
@@ -33,7 +33,7 @@
                     </p>
                     <hr class="horizontal dark mt-2">
                     <!-- Customer add form started here  -->
-                    <form action="{{route('change_password_api')}}" method="POST">
+                    <form action="{{route('change_password_api_admin')}}" method="POST">
                         @csrf
                         <!-- company and name fields  -->
                         <div class="row justify-content-center">

@@ -1,5 +1,8 @@
 <!-- Navbar -->
-
+<?php
+use Illuminate\Support\Facades\Auth;
+$customerName = Auth::guard('admin')->user()->name;
+?>
 <div class="row mt-2">
   <div class="col-md-6">
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
@@ -91,7 +94,7 @@
     <div class="card shadow-lg blur">
       <div class="card-header pb-0 pt-3  bg-transparent ">
         <div class="float-start">
-          <h5 class="mt-3 mb-0">Welcome !</h5>
+          <h5 class="mt-3 mb-0">{{$customerName}}</h5>
           <p>These are user profile settings</p>
         </div>
         <div class="float-end mt-4">
@@ -104,13 +107,26 @@
       <hr class="horizontal dark my-1">
       <div class="card-body pt-sm-3 pt-0">
         <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Configuartions : </h6>
-        </div>
         <!-- Sidenav Type -->
         <div class="mt-3">
+        <a class="nav-link" href="{{route('admin_profile')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <!-- <span class="nav-link-text ms-1">Change Password</span> -->
+          <h6 class="mb-0">Profile</h6>
+        </a>
+      </div>
+        <div class="mt-3">
+        <a class="nav-link {{(request()->segment(1)=='change_password_admin') ? 'active' : '' }}" href="{{route('change_password_admin')}}" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <!-- <span class="nav-link-text ms-1">Change Password</span> -->
           <h6 class="mb-0">Change Password</h6>
-        </div>
+        </a>
+      </div>
+      <div class="mt-3">
+        <a class="nav-link" href="" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+          <!-- <span class="nav-link-text ms-1">Change Password</span> -->
+          <h6 class="mb-0">Logout</h6>
+        </a>
+      </div>
+
       </div>
     </div>
 </div>

@@ -58,7 +58,11 @@ require __DIR__.'/auth.php';
     });
 
     Route::middleware('admin')->group(function () {
-        
+
+        Route::get('/change_password_admin',[adminController::class,'change_password_admin'])->name('change_password_admin');
+        Route::post('/change_password_api_admin',[adminController::class,'change_password_api_admin'])->name('change_password_api_admin');
+        Route::get('/profile_admin',[adminController::class,'profile_admin'])->name('admin_profile');
+        Route::post('/store1',[adminController::class,'store1'])->name('admin_update');
         Route::delete('/customers/delete/{id}',[customerController::class,'delete'])->name('customers.delete');
         Route::put('/customers/formStatus/{id}',[customerController::class,'formStatus'])->name('customers.formStatus');
         Route::get('/customers/list',[customerController::class,'list'])->name('customers.list');
