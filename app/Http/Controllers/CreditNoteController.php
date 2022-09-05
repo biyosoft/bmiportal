@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CreditNotes;
 use App\Models\CreditNote;
 use App\Models\DeliveryOrder;
 use App\Models\User;
 use App\Models\invoice;
 use Illuminate\Http\Request;
+use Excel;
 
 class CreditNoteController extends Controller
 {
@@ -15,9 +17,16 @@ class CreditNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $creditnotes = CreditNote::paginate(2);
+    public function index(Request $request)
+     {
+        $user_id = $request->input('user_id');
+        $do_no = $request->input('do_no');
+
+        $creditnotes = CreditNote::leftjoin('delivery_orders', Array('delivery_orders.id' => 'credit_notes.deliveryorder_id'))
+        ->where('credit_notes.user_id', 'like', '%'.$user_id.'%')
+        ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
+        ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
+
         return view('creditnote.index',compact('creditnotes'));
     }
 
@@ -175,4 +184,10 @@ class CreditNoteController extends Controller
         $creditnotes->delete();
         return back()->with('error','The credit note is deleted successfully !');
     }
+
+    public function exportIntoExcel(){
+        ob_end_clean();
+        return Excel::download(new CreditNotes,'CNlist.xlsx');
+    }
+
 }

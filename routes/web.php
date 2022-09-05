@@ -131,6 +131,10 @@ require __DIR__.'/auth.php';
 
     });
     Route::get('invoices-excel',[invoiceController::class,'exportIntoExcel'])->name('invoices.excel');
+    Route::get('invoices-excel-user',[invoiceController::class,'exportIntoExcel_user_invoices'])->name('invoices.excel_user');
+    Route::get('CN-excel',[CreditNoteController::class,'exportIntoExcel'])->name('CN.excel');
+    Route::get('DN-excel',[DebitNoteController::class,'exportIntoExcel'])->name('DN.excel');
+    Route::get('DO-excel',[DeliveryOrderController::class,'exportIntoExcel'])->name('DO.excel');
     Route::get('invoices-csv',[invoiceController::class,'exportIntoCSV'])->name('invoice.csv');
     Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
     Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');

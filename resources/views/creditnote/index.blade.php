@@ -30,6 +30,13 @@
             <i class="fa fa-filter"></i>
             Filter
           </button>
+          <a href="{{route('CN.excel')}}">
+            <button name="exportFilter" 
+          class=" btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" 
+          type="button">
+            Export
+          </button>
+        </a>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <form action="{{route('creditnotes.index')}}" method="GET">
           <div class="accordion-body row">
@@ -98,7 +105,7 @@
                   <td>
                     <div class="mx-3">
                       <div class="flex-column ">
-                        <p class="text-xs text-secondary mb-0">{{$creditnote->DO->do_no}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$creditnote->do_no}}</p>
                       </div>
                     </div>
                   </td>

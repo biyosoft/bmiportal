@@ -26,6 +26,13 @@
   <div class="table-responsive">
     <div class="dataTable-wrapper dataTable-loading no-footer sortable fixed-height fixed-columns">
       <div class="dataTable-top">
+        <a href="{{route('invoices.excel_user')}}">
+            <button name="exportFilter" 
+          class=" btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" 
+          type="button">
+            Export
+          </button>
+        </a>
         <table class="table align-items-center mb-0">
           <thead>
             <tr>

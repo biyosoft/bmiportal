@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DelivertOrders;
 use App\Models\DeliveryOrder;
 use App\Models\invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Excel;
 
 class DeliveryOrderController extends Controller
 {
@@ -207,4 +209,10 @@ class DeliveryOrderController extends Controller
             }
             return redirect()->route('deliveryOrders.index')->with('success','DO Has Been Uploaded Succesfully !');
     }
+
+    public function exportIntoExcel(){
+        ob_end_clean();
+        return Excel::download(new DelivertOrders,'DOlist.xlsx');
+    }
+
 }

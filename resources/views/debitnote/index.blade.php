@@ -30,6 +30,13 @@
             <i class="fa fa-filter"></i>
             Filter
           </button>
+          <a href="{{route('DN.excel')}}">
+            <button name="exportFilter" 
+          class=" btn bg-gradient-dark ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" 
+          type="button">
+            Export
+          </button>
+        </a>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <form action="{{route('debitnotes.index')}}" method="GET">
           <div class="accordion-body row">

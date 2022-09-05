@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CreditNote;
+use App\Exports\DebitNotes;
 use App\Models\DebitNote;
 use App\Models\DeliveryOrder;
 use App\Models\User;
 use App\Models\invoice;
 use Illuminate\Http\Request;
+use Excel;
 
 class DebitNoteController extends Controller
 {
@@ -16,9 +17,16 @@ class DebitNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $debitnotes = DebitNote::paginate(2);
+        $user_id = $request->input('user_id');
+        $do_no = $request->input('do_no');
+
+        $debitnotes = DebitNote::leftjoin('delivery_orders', Array('delivery_orders.id' => 'debit_notes.deliveryorder_id'))
+        ->where('debit_notes.user_id', 'like', '%'.$user_id.'%')
+        ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
+        ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
+
         return view('debitnote.index',compact('debitnotes'));
     }
 
@@ -175,4 +183,10 @@ class DebitNoteController extends Controller
         $debitnotes->delete();
         return back()->with('error','The debit note is deleted successfully !');
     }
+    
+    public function exportIntoExcel(){
+        ob_end_clean();
+        return Excel::download(new DebitNotes,'DNlist.xlsx');
+    }
+
 }

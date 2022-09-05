@@ -12,6 +12,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Session;
 use App\Exports\InvoiceExport;
+use App\Exports\User_invoiceExport;
 use Excel;
 use Illuminate\Support\Facades\Notification;
 use Symfony\Component\Console\Input\Input;
@@ -63,9 +64,8 @@ class invoiceController extends Controller
     public function user_invoices()
     {
         $user = Auth::user();
-        // print_r($user->id);die;
-        $invoices = invoice::where('user_id',1)->get();
-        return view('invoices.user_invoices', ['invoices' => invoice::paginate(10)],compact('invoices'));
+        $user_id = $user->id;
+        return view('invoices.user_invoices', ['invoices' => invoice::where('user_id', $user_id)->paginate(10)]);
     }
 
     /**
@@ -209,7 +209,13 @@ class invoiceController extends Controller
 
 
     public function exportIntoExcel(){
+        ob_end_clean();
         return Excel::download(new InvoiceExport,'invoicelist.xlsx');
+    }
+
+    public function exportIntoExcel_user_invoices(){
+        ob_end_clean();
+        return Excel::download(new User_invoiceExport,'invoicelist.xlsx');
     }
 
     public function exportIntoCSV(){
