@@ -56,14 +56,14 @@ class PaymentController extends Controller
 
     public function pending(){
         $payments = payment::all()->where('status',0);
-        $payments = $this->paginate($payments);
+        $payments = $this->paginate($payments,10);
         $payments->withpath(route('payments.pending'));
         return view('payments.pending_payments',compact('payments', $payments));
     }
 
     public function approved(){
         $payments = payment::all()->where('status',1);
-        $payments = $this->paginate($payments);
+        $payments = $this->paginate($payments,10);
         $payments->withpath(route('payments.approved'));
         return view('payments.approved_payments',compact('payments', $payments));
     }
@@ -87,7 +87,6 @@ class PaymentController extends Controller
      */
     public function store(Request $request,$id)
     {
-        
         $payments = new payment();
         $invoices = invoice::find($id);
         $payments->invoice = $invoices->invoiceId;
@@ -106,7 +105,7 @@ class PaymentController extends Controller
        $payments = payment::where('invoice_id',$invoices->id)->latest('created_at')->first();
        $user=Auth()->user();
        $admins = Admin::all();
-        Notification::send($admins, new PaymentProofUploaded($user,$invoices,$payments));
+        // Notification::send($admins, new PaymentProofUploaded($user,$invoices,$payments));
     //    Admin::all()->notify(new PaymentProofUploaded($user));
        return redirect()->back()
        ->with('success','The New Payment Is Added');

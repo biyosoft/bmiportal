@@ -18,6 +18,9 @@
   <link href="{{asset('soft-theme/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('soft-theme/assets/css/soft-ui-dashboard.css?v=1.0.9')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   @livewireStyles
 </head>
 <style>
@@ -394,6 +397,7 @@
   <script src="{{asset('soft-theme/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   
   @yield('scripts')
   
@@ -552,6 +556,27 @@
   <!-- Github buttons -->
       </script>
 
+
+    
+      <script>
+            @if(Session::has('success'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.success("{{ session('success') }}");
+            @endif
+
+            @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.error("{{ session('error') }}");
+            @endif
+       </script>
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

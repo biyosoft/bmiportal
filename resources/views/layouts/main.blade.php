@@ -183,6 +183,7 @@
   </main>
   <!--   Core JS Files   -->
   @livewireScripts
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="{{asset('soft-theme/assets/js/core/popper.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -191,6 +192,25 @@
   <script src="{{asset('soft-theme/assets/js/plugins/dragula/dragula.min.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/jkanban/jkanban.js')}}"></script>
   <script src="{{asset('soft-theme/assets/js/plugins/chartjs.min.js')}}"></script>
+  <script>
+            @if(Session::has('success'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.success("{{ session('success') }}");
+            @endif
+
+            @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+                    toastr.error("{{ session('error') }}");
+            @endif
+       </script>
 
   <script>
     

@@ -1,7 +1,8 @@
 @extends('layouts.main1')
 @section('content')
+@section('title')
 <nav class="navbar navbar-main navbar-expand-lg px-0 shadow-none border-radius-xl">
-   <div class="container-fluid py-1 px-3">
+   <div class="container-fluid">
    <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
@@ -11,7 +12,8 @@
     </nav>
    </div>
 </nav>
-<div class="row">
+@endsection
+<div class="row mt-2 p-2">
     <div class="col">
         <div class="card ">
             <div class="card-body ">

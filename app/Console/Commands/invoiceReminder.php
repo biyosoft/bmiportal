@@ -16,14 +16,14 @@ class invoiceReminder extends Command
      *
      * @var string
      */
-    protected $signature = 'invoice:update';
+    protected $signature = 'invoice:remind';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This is used to remind ';
 
     /**
      * Create a new command instance.
@@ -42,15 +42,22 @@ class invoiceReminder extends Command
      */
     public function handle()
     {
+        // dd(config('global')); // global config for days of reminders before duedate
+        $global = config('global');
         $users = User::get();
         $invoices = invoice::get();
         foreach($invoices as $invoice){
-            //comparing the differnce between the dates
-            if(Carbon::parse($invoice->invoice_date)->diffInDays(Carbon::now()) == 7){ 
-                foreach($users as $user){
-                    Notification::send($user,new notifyPendingPayments());
-                }
+            // dd(Carbon::now());
+            $due_date = $invoice->date;
+            $invoice_id = $invoice->invoiceId;
+            dd($due_date , $invoice_id);
+            $diffindays =Carbon::parse($invoice->date)->diffInDays(Carbon::now());
+            // dd($diffindays);
+            if(in_array($diffindays , $global)){ ;
+                    $users = User::where('id',$invoice->user_id)->get();    
+                    Notification::send($users,new notifyPendingPayments($due_date,$invoice_id));
             }
         }
     }
+
 }

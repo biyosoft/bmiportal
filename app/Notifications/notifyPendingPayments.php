@@ -10,6 +10,9 @@ use App\Console\Commands\invoiceReminder;
 
 class notifyPendingPayments extends Notification
 {
+    public $diffindays;
+    public $due_date;
+    public $invoice_id;
     use Queueable;
 
     /**
@@ -17,9 +20,11 @@ class notifyPendingPayments extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($diffindays,$due_date,$invoice_id)
     {
-        //
+        $this->diffindays = $diffindays;
+        $this->due_date = $due_date;
+        $this->invoice_id = $invoice_id;
     }
 
     /**
@@ -42,9 +47,8 @@ class notifyPendingPayments extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You have pending invoices o be due within 7 days !')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Invoice NO : ' . $this->invoice_id)
+                    ->line('Due Date : ' . $this->due_date);
     }
 
     /**

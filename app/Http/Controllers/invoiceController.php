@@ -108,7 +108,7 @@ class invoiceController extends Controller
         $user = User::find($id);
         $admin_user = Auth::guard('admin')->user();
         $invoices = invoice::latest('created_at')->first();
-        Notification::send($user, new NewInvoiceAdded($admin_user,$invoices));
+        // Notification::send($user, new NewInvoiceAdded($admin_user,$invoices));
         return redirect()->route('invoices.index')->with('success','Invoice Has Been Added Succesfully !');
     }
 

@@ -10,7 +10,7 @@ return [
     'invoice_no' => 'Invoice No',
     'view_invoice' => 'View Invoices' ,
     'add_invocie' => 'Add Invoice' ,
-    'upload_invocie' => 'Upload Invoices' ,
+    'upload_invocie' => 'Batch Upload' ,
     'customers' => 'Customers',
     'customer' => 'Customer',
     'view_customer' => 'View All Customers' ,
@@ -42,9 +42,9 @@ return [
     'do_doc' => 'DO Document',
     'do_no' => 'DO Number', 
     'invoice_no' => 'Invoice Number', 
-    'upload_do' => 'Upload Multiple DO',
-    'upload_delivery_order' => 'Upload Delivery Order',
-    'upload_delivery_orders' => 'Upload Delivery Orders',
+    'upload_do' => 'Batch Upload',
+    'upload_delivery_order' => 'Batch Upload',
+    'upload_delivery_orders' => 'Batch Upload',
     'payment_term' => 'Payment Term',
     'phone' => 'Phone',
     'dn' => 'Debit Note',
@@ -60,8 +60,8 @@ return [
     'cn_no' => 'CN Number',
     'dn_no' => 'DN Number',
     'do' => 'Delivery Order',
-    'upload_cn' => 'Upload Multiple CN',
-    'upload_dn' => 'Upload Multiple DN',
+    'upload_cn' => 'Batch Uplaod',
+    'upload_dn' => 'Batch Upload',
 
 
 

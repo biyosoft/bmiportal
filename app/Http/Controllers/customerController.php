@@ -106,6 +106,7 @@ class customerController extends Controller
     {
         $users = User::find($id);
         $users->name = $request->input('name');
+        $users->customer_no = $request->input('customer_no');
         $users->email = $request->input('email');
         $users->company = $request->input('company');
         $users->payment_term = $request->input('payment_term');

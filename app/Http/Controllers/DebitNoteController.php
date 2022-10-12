@@ -7,6 +7,7 @@ use App\Models\DebitNote;
 use App\Models\DeliveryOrder;
 use App\Models\User;
 use App\Models\invoice;
+use Smalot\PdfParser\Parser;
 use Illuminate\Http\Request;
 use Excel;
 
@@ -97,15 +98,58 @@ class DebitNoteController extends Controller
             'file' => 'required',
         ]);
         $deliveryorders = DeliveryOrder::all();
-       $users = User::all();
+        $users = User::all();
         $file = $request->file;
-         $files = count($request->file);
-         foreach($request->file as $file)
-            {
-                $name=time().'-'.$file->getClientOriginalName();  
-                $data[] = $name;  
+        $files = count($request->file);
+        $dn_no = array();
+        $customer_no = array();
+        $amount = array();
+        $payment_term = array();
+        $dn_date = array();
+
+        foreach($request->file as $file)
+        {
+            $prev_files[] = time().'-'.$file->getClientOriginalName();
+            $name='DN'.'-'.time().'-'.$file->getClientOriginalName();  
+            $data[] = $name;  
+            $filename = time().'-'.$file->getClientOriginalName();
+            $pdfParser = new Parser();
+            $pdf = $pdfParser->parseFile($file->path());
+            $content = $pdf->getText();
+            $skuList = preg_split('/\r\n|\r|\n/', $content);
+            // dd($skuList);
+            $file->move(public_path('DN'), $filename);
+            foreach ($skuList as $value) {
+                if (strpos($value, 'DN No.:') !== false) 
+                    { 
+                        $dn_no1 = trim($value , "DN No.:");
+                        $dn_no[]= $dn_no1;
+                    }
+                else if (strpos($value, 'Customer No.:') !== false) 
+                    { 
+                        $customer_no1 = trim($value , "Customer No.:");
+                        $customer_no[]= $customer_no1;
+                    }
+                else if (strpos($value, 'Total Amount Malaysian Ringgit') !== false) 
+                    { 
+                        $amount1 = trim($value , "Total Amount Malaysian Ringgit");
+                        $amount[]= $amount1;
+                    }
+                else if (strpos($value, 'Payment Terms:') !== false) 
+                    { 
+                        $payment_term1 = trim($value , "Payment Terms: Days fr Invoice Date (EOM)");
+                        $payment_term[]=$payment_term1;
+                    }
+                else if (strpos($value, 'DN Date: ') !== false) 
+                    { 
+                        $dn_date1 = trim($value , "DN Date: ");
+                        $dn_date[]=$dn_date1;
+                    }
+                }
+                // $test[] = $skuList;
             }
-    return view('debitnote.bulkupload',compact('users','files','data','deliveryorders'));
+    return view('debitnote.bulkupload',compact('users','files','data','deliveryorders',
+                'payment_term','amount','customer_no','dn_no','dn_date'));
 
     }
 

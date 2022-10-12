@@ -1,7 +1,8 @@
 @extends('layouts.main1')
 @section('content')
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
-   <div class="container-fluid py-1 px-3">
+@section('title')
+<nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl">
+   <div class="container-fluid ">
    <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
@@ -11,9 +12,10 @@
     </nav>
    </div>
 </nav>
-<div class="container-fluid py-4">
+@endsection
+<div class="container-fluid p-2">
    <div class="row ">
-    <div class="col-12 col-lg-10">
+    <div class="col-10 col-lg-10">
     
             <div class="card card-body">
             <h5 class="font-weight-bolder mb-0">Upload Debit Notes</h5>
@@ -29,10 +31,10 @@
             <form action="{{route('debitnote.upload1')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
-           @for($i=1 ; $i<=$files ; $i++)
+           @for($i=0 ; $i<$files ; $i++)
            <div class="card mt-2">
         <div class="card-body">
-           <h5 class="font-weight-bolder mb-0">DN #{{$i}}</h5>
+           <h5 class="font-weight-bolder mb-0">DN #{{$i + 1}}</h5>
            <hr class="horizontal dark mt-2">
 
             <!-- company and name fields  -->
@@ -66,7 +68,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="date">{{__('labels.dn_no')}}</label>
-                            <input value="" type="text" class="form-control" name="dn_no[]" required>
+                            <input value="{{$dn_no[$i]}}" type="text" class="form-control" name="dn_no[]" required>
                             <span class="text-danger">@error('invoiceId') {{$message}} @enderror</span>
 
                         </div>
@@ -75,15 +77,15 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="invoice_doc">DN Document</label>
-                            <input value="" type="file"   class="form-control" name="file[]" required accept=".pdf,.doc,.xlsx,.docx">
-                            <span   class="text-danger text-sm ">@error('file') {{$message}} @enderror</span>
+                            <input type="hidden" name="dn_doc" value="{{$data[$i]}}">
+                            <span class="badge badge-secondary p-3 badge-block  w-100">{{$data[$i]}}</span>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="date">{{__('labels.dn_date')}}</label>
-                            <input type="date" class="form-control" name="dn_date[]" required>
+                            <input type="date" value="{{date('Y-m-d',strtotime($dn_date[$i]))}}" class="form-control dnDate" name="dn_date[]" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
@@ -91,8 +93,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="date">Payment Term</label>
-                            <input type="date" class="form-control" name="payment_term[]" required>
+                            <label for="date">Due Date</label>
+                            <input type="date" class="form-control dueDate" name="payment_term[]" required>
                             <span class="text-danger">@error('date') {{$message}} @enderror</span>
 
                         </div>
@@ -117,3 +119,29 @@
    </div>
 </div>
 @endsection
+
+
+@section('scripts')
+<script type="text/javascript">
+     $(".multi-select").select2();
+     $(".selection").addClass('form-select');
+     $(".selection").css("padding","6px");
+     $(".select2-selection").addClass('form-select');
+     $(".select2-selection").css({"border":"none", "padding":"0px"});
+</script>
+@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    //Add new due date on the invoice date with payment terms
+    $(document).ready(function(){ 
+        $('.dnDate').each(function(index , element){
+                const invoiceDte = $(element).val();
+                invoiceDate = new Date(invoiceDte);
+                output_f=new Date(invoiceDate.setDate(invoiceDate.getDate()+60)).toISOString().split('.');
+                output_s = output_f[0].split('T');
+                const dueDte = $(element).parent().parent().parent().find('.dueDate');
+                dueDte.val(output_s[0]);
+        }); 
+    });
+</script>

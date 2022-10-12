@@ -1,7 +1,8 @@
 @extends('layouts.main1')
 @section('content')
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
-   <div class="container-fluid py-1 px-3">
+@section('title')
+<nav class="navbar navbar-main navbar-expand-lg px-0  shadow-none border-radius-xl">
+   <div class="container-fluid">
    <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
@@ -12,21 +13,14 @@
    </div>
 </nav>
 
-<div class="container-fluid py-4">
+@endsection
+<div class="container-fluid p-2">
    <div class="row ">
-    <div class="col-12 col-lg-10">
+    <div class="col-12 col-lg-12">
     <div class="card">
         <div class="card-body">
             <h5 class="font-weight-bolder mb-0">Add invoice</h5>
             <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
-            &nbsp;
-            <span class="text-success">
-            @if(session('success'))
-            {{session('success')}}
-            @endif
-            </span>
-
-            </p>
             <hr class="horizontal dark mt-2">
             <!-- invoice add form started here  -->
             <form action="{{route('invoices.store')}}" method="POST" enctype="multipart/form-data">
@@ -40,8 +34,7 @@
                             <select id="user_id" name="user_id" class="form-control">
                                 <option value="">Select Customer</option>
                                 @foreach($users as $user)
-                                 <option value="{{$user->id}}">{{$user->name}}</option>
-                                 {{-- <input id="pt" type="hidden" value="{{$user->payment_term}}"> --}}
+                                <option id="pt" value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
                             <span class="text-danger">@error('user_id') {{$message}} @enderror</span>
@@ -74,9 +67,7 @@
 
                         </div>
                     </div>
-               
-            <!-- email and invoice fields  -->
-              
+                         <!-- email and invoice fields  -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="invoice_doc">Invoice Document</label>
@@ -85,8 +76,6 @@
 
                         </div>
                     </div>
-                    
-                
                 <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="amount">Amount</label>
@@ -104,9 +93,6 @@
                     <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" 
                     type="submit">Add invoice</button>
                 </div>
-
-                
-                
             </form>
         </div>
     </div>
@@ -116,16 +102,10 @@
 @endsection
 @section('scripts')
 <script>
-    var user = {};
-    $(document).ready(function(){ 
-        $('#user_id').change( function() {
-            $(this).find(":selected").each(function () {
-                user.userId = $('#pt').val();
-            });
-        });
+$(document).ready(function(){ 
     $('#invoiceDate').change(function() {
         invoiceDate = new Date($('#invoiceDate').val());
-        output_f=new Date(invoiceDate.setDate(invoiceDate.getDate()+user.userId)).toISOString().split('.');
+        output_f=new Date(invoiceDate.setDate(invoiceDate.getDate()+60)).toISOString().split('.');
         output_s = output_f[0].split('T');
         $('#dueDate').val(output_s[0]);
     });
