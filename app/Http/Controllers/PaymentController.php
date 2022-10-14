@@ -25,6 +25,12 @@ class PaymentController extends Controller
     public function index()
     {
         //$invoices = invoice::all();
+
+        $debitnotes = payment::where('debit_notes.user_id', 'like', '%'.$user_id.'%')
+        ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
+        ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
+
+
         $payments = payment::all();
         return view('payments.index', ['payments' => payment::paginate(10)], compact('payments'));
     }

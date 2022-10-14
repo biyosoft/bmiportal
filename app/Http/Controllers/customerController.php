@@ -18,11 +18,37 @@ class customerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $users = User::select("*")
-        ->where("form_status",2)->paginate(10);
-        return view('customers.index', compact('users'));
+        $name = $req->input('name');
+        $company = $req->input('company');
+        $email = $req->input('email');
+        $phone = $req->input('phone');
+        $status = $req->input('status');
+
+         if($req){
+            if(!empty($name) || !empty($company) || !empty($email) || !empty($phone) || !empty($status)){
+                // dd('enter');
+                $users = User::where('name', 'like', '%'.$name.'%')
+                ->where('company', 'like', '%'.$company.'%')
+                ->where('email', 'like', '%'.$email.'%')
+                ->where('phone', 'like', '%'.$phone.'%')
+                ->where('status', 'like', '%'.$status.'%')
+                ->paginate(10)
+                ->appends(['name'=> $name, 
+                'company' => $company,
+                'email' => $email,
+                'phone' => $phone,
+                'status' => $status,
+                    ]);
+            }
+            else{
+                $users = user::paginate(10);
+            }
+            return view('customers.index', compact('users'));
+         }
+
+        
     }
 
     public function list()

@@ -28,7 +28,6 @@ class invoiceController extends Controller
      */
     public function index(Request $request)
     {
-        
         $user_id = $request->input('user_id');
         $invoiceId = $request->input('invoiceId');
         $date = $request->input('date');

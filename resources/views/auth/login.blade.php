@@ -12,18 +12,6 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                @if(session('status'))
-                        <div class="alert alert-success">
-                            {{session('status')}}
-                        </div>
-                    @endif
-                    @if($errors->any())
-                        @foreach($errors->all() as $error)
-                            <div style="font-size: 12px;" class=" text-danger">
-                                {{$error}}
-                            </div>
-                        @endforeach
-                    @endif
                   <form role="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">

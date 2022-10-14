@@ -138,9 +138,9 @@ require __DIR__.'/auth.php';
     Route::get('invoices-csv',[invoiceController::class,'exportIntoCSV'])->name('invoice.csv');
     Route::get('/invoices/download/{id}',[invoiceController::class,'download'])->name('invoices.download');
     Route::match(['get','post'],'invoices/upload',[invoiceController::class,'upload'])->name('invoices.upload');
-    Route::match(['get','post'],'invoices',[invoiceController::class,'index'])->name('invoices.index');
+    // Route::match(['get','post'],'/invoices/index1',[invoiceController::class,'index'])->name('invoices.index');
     Route::post('invoices/filters',[invoiceController::class,'filters'])->name('invoices.filters');
-    Route::get('invoices',[invoiceController::class,'index'])->name('invoices.index');
+    Route::match(['get','post'],'invoices/index1',[invoiceController::class,'index'])->name('invoices.index');
     Route::get('invoices/create',[invoiceController::class,'create'])->name('invoices.create');
     Route::post('store',[invoiceController::class,'store'])->name('invoices.store');
     Route::get('invoices/show/{id}',[invoiceController::class,'show'])->name('invoices.show');
@@ -158,15 +158,6 @@ require __DIR__.'/auth.php';
     Route::get('/deliveryOrders/bulkUpload',[DeliveryOrderController::class,'bulkUpload'])->name('deliveryOrder.bulkUpload');
     Route::get('/deliveryOrders/download/{id}',[DeliveryOrderController::class,'download'])->name('deliveryOrder.download');
     Route::resource('deliveryOrders','DeliveryOrderController');
-
-
-   
-
-
-
-
-
-
 
 
 

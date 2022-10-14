@@ -23,16 +23,6 @@
 @endsection
 <div class="card p-2 mt-2">
   <div class="card-body" >
-    @if(session('success'))
-    <div class="text-success">
-      {{session('success')}}
-    </div>
-    @endif
-    @if(session('error'))
-    <div class="text-danger">
-      {{session('error')}}
-    </div>
-    @endif
     <div class="accordion" id="accordionExample">
       <div class="accordion-item"> 
           <button name="searchFilter" class="collapsed btn bg-gradient-info ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

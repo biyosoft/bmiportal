@@ -37,7 +37,8 @@
           </button>
         </a>
         <div id="collapseOne" class="accordion-collapse collapse filter-border" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <form id="form1" action="{{route('invoices.index')}}" method="GET">
+            <form id="form1" action="{{route('invoices.index')}}" method="POST">
+              @csrf
           <div class="accordion-body row">
 
               <div class="col-3">
