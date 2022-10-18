@@ -23,12 +23,16 @@ class DebitNoteController extends Controller
         $user_id = $request->input('user_id');
         $do_no = $request->input('do_no');
 
-        $debitnotes = DebitNote::leftjoin('delivery_orders', Array('delivery_orders.id' => 'debit_notes.deliveryorder_id'))
+        if($request->has('user_id') || $request->has('do_no')){
+            $debitnotes = DebitNote::leftjoin('delivery_orders', Array('delivery_orders.id' => 'debit_notes.deliveryorder_id'))
         ->where('debit_notes.user_id', 'like', '%'.$user_id.'%')
         ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
         ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
-
-        return view('debitnote.index',compact('debitnotes'));
+        }
+        else{
+            $debitnotes = DebitNote::all();
+        }
+    return view('debitnote.index',compact('debitnotes'));
     }
 
     /**
@@ -154,13 +158,20 @@ class DebitNoteController extends Controller
     }
 
     public function upload1(Request $request){
-        $size = count($request->file);
+        // dd($request->all());
+        $size = count($request->dn_no);
         for($i=0 ; $i<$size ; $i++)
         {
                 $debitnotes = new DebitNote();
                 $debitnotes->user_id = $request->input('user_id')[$i];
-                $debitnotes->deliveryorder_id = $request->input('deliveryorder_id')[$i];
+                if($request->has('deliveryorder_id')){
+                    $debitnotes->deliveryorder_id = $request->input('deliveryorder_id')[$i];
+                }
+                else{
+                    $debitnotes->deliveryorder_id = 0;
+                };
                 $debitnotes->dn_no = $request->input('dn_no')[$i];
+                $debitnotes->dn_doc = $request->input('dn_doc')[$i];
                 $debitnotes->dn_date = $request->input('dn_date')[$i];
                 $debitnotes->payment_term = $request->input('payment_term')[$i];
                 if (!empty($request->file[$i])) {
@@ -173,7 +184,7 @@ class DebitNoteController extends Controller
                 $debitnotes->save();
                 
             }
-            return redirect()->route('debitnotes.index')->with('success','DN Has Been Updated Succesfully !');
+            return redirect()->route('debitnotes.index')->with('success','DN has been added succesfully !');
     }
 
     /**

@@ -56,7 +56,7 @@
                         <div class="form-group mb-3">
                             <label for="customer">Delivery Order</label>
                             <select name="deliveryorder_id[]" class="form-control">
-                                <option value=""></option>
+                                <option value="0" selected disabled>Select Delivery Order</option>
                                 @foreach($deliveryorders as $deliveryorder)
                                  <option value="{{$deliveryorder->id}}">{{$deliveryorder->do_no}}</option>
                                 @endforeach
@@ -77,7 +77,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="invoice_doc">DN Document</label>
-                            <input type="hidden" name="dn_doc" value="{{$data[$i]}}">
+                            <input type="hidden" name="dn_doc[]" value="{{$data[$i]}}">
                             <span class="badge badge-secondary p-3 badge-block  w-100">{{$data[$i]}}</span>
                         </div>
                     </div>

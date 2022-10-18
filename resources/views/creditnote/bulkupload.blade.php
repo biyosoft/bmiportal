@@ -55,8 +55,8 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="customer">Delivery Order</label>
-                            <select name="deliveryorder_id[]" class="form-control">
-                                <option value=""></option>
+                            <select name="deliveryorder_id[]" class="form-control" required>
+                                <option value="0" selected>Select DO</option>
                                 @foreach($deliveryorders as $deliveryorder)
                                  <option value="{{$deliveryorder->id}}">{{$deliveryorder->do_no}}</option>
                                 @endforeach

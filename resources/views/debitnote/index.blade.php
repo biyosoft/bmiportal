@@ -16,16 +16,6 @@
 </nav>
 @endsection
 <div class="card card-body mt-2">
-    @if(session('success'))
-        <div class="alert alert-success text-white" style="max-width: 300px;">
-            {{session('success')}}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-danger text-white" style="max-width: 300px;">
-            {{session('error')}}
-        </div>
-    @endif
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
           <button class="collapsed btn bg-gradient-info ms-auto mb-3 mt-4 js-btn-next mt-3 filter-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

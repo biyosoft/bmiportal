@@ -58,8 +58,6 @@
               <div class="col-3">
                 <input class="form-control" name="date" type="date" placeholder="Date">
               </div>
-              @csrf
-
               <div class="button-row d-flex">
                 <button style="margin-right: 8%" class="btn bg-gradient-info ms-auto mb-0 mt-4 js-btn-next" type="submit">Apply</button>
             </div>
@@ -95,7 +93,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs text-secondary mb-0">{{$invoice->user->name}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$invoice->user->name ? $invoice->user->name : 'N/A' }}</p>
                       </div>
                     </div>
                   </td>
@@ -123,7 +121,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs text-secondary mb-0">RM {{ convert_currency($invoice->amount)}}</p>
+                        <p class="text-xs text-secondary mb-0">RM {{ $invoice->amount}}</p>
                       </div>
                     </div>
                   </td>

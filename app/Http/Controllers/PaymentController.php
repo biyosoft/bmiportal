@@ -26,9 +26,9 @@ class PaymentController extends Controller
     {
         //$invoices = invoice::all();
 
-        $debitnotes = payment::where('debit_notes.user_id', 'like', '%'.$user_id.'%')
-        ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
-        ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
+        // $debitnotes = payment::where('', 'like', '%'.$user_id.'%')
+        // ->where('delivery_orders.do_no', 'like', '%'.$do_no.'%')->paginate(4)
+        // ->appends(['user_id'=> $user_id, 'do_no' => $do_no]);
 
 
         $payments = payment::all();

@@ -47,7 +47,7 @@ class invoiceController extends Controller
                 ->appends(['user_id'=> $user_id, 'invoiceId' => $invoiceId, 'date' => $date]);
             }
             else {
-                $invoices = invoice::paginate(4);
+                $invoices = invoice::paginate(10);
             }
             
         }

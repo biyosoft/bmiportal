@@ -50,6 +50,15 @@
                         </div>
                     </div>
                 
+                    <div class="col-md-6" style="display: none;">
+                        <div class="form-group mb-3">
+                            <label for="date">Customer No</label>
+                            <input value="{{$customer_no[$i]}}" type="text" class="form-control" name="customer_no[]" required>
+                            <span class="text-danger">@error('cutomer_no') {{$message}} @enderror</span>
+
+                        </div>
+                    </div>
+
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="date">Invoice No</label>

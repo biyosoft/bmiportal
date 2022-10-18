@@ -71,6 +71,7 @@ class fileController extends Controller
         $customer_no = array();
         $invoice_date = array();
         $payment_term = array();
+        $customer_no = array();
 
         foreach($request->file as $file)
         {
@@ -83,7 +84,7 @@ class fileController extends Controller
             $pdf = $pdfParser->parseFile($file->path());
             $content = $pdf->getText();
             $skuList = preg_split('/\r\n|\r|\n/', $content);
-            
+            // dd($skuList);
             foreach ($skuList as $value) {
                 if (strpos($value, 'Total Amount Malaysian Ringgit') !== false) 
                     { 
@@ -110,6 +111,12 @@ class fileController extends Controller
                         $payment_term1 = trim($value , "Payment Terms: Days fr Invoice Date (EOM)");
                         $payment_term[]=$payment_term1;
                     }
+                else if (strpos($value, 'Customer No.:') !== false) 
+                    { 
+                        $customer_no1 = trim($value , "Payment Terms: Days fr Invoice Date (EOM)");
+                        $customer_no[]=$customer_no1;
+                    }
+
                 }
             }
         return view('invoices.bulk-invoice',compact('users','files','data','amount','invoice_no','customer_no','prev_files','invoice_date'));
