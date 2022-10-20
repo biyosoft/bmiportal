@@ -376,7 +376,7 @@
                         <div class="collapse" id="applicationsExa" style="">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="soft-theme/../pages/applications/kanban.html">
+                                    <a class="nav-link " href="{{route('change_password_admin')}}">
                                         
                                         <span class="sidenav-normal"> {{__('labels.change_password')}}</span>
                                     </a>

@@ -41,8 +41,8 @@
               </div>
             </div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
-                <img src="{{asset('soft-theme/assets/img/shapes/pattern-lines.svg')}}" alt="pattern-lines" class="position-absolute opacity-4 start-0">
+              <div class="position-relative bg-gradient-info h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                <img src="{{asset('images/BMI_Group_Logo.jpg')}}" alt="pattern-lines" class="position-absolute opacity-4 start-0">
                 <div class="position-relative">
                   <img class="max-width-500 w-100 position-relative z-index-2" src="{{asset('soft-theme/assets/img/illustrations/chat.png')}}" alt="chat-img">
                 </div>
