@@ -127,7 +127,8 @@
             <div class="card card-body">
                 <b class="text-dark text-center">Attachements</b>
                 <hr class="text-dark">
-                <span><i class="fas fa-file-pdf text-lg me-1"></i> Credit Application Form (CC1) </span>
+
+                <span><a href="{{route('file.download')}}"><i class="fas fa-file-pdf text-lg me-1"></i></a> Credit Application Form (CC1) </span>
                 <!-- <span><i class="fas fa-file-pdf text-lg me-1"></i> Form 24 </span> -->
             </div>
         </div>

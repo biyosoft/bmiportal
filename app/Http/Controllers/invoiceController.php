@@ -47,7 +47,7 @@ class invoiceController extends Controller
                 ->appends(['user_id'=> $user_id, 'invoiceId' => $invoiceId, 'date' => $date]);
             }
             else {
-                $invoices = invoice::paginate(10);
+                $invoices = invoice::paginate(25);
             }
             
         }
@@ -96,7 +96,7 @@ class invoiceController extends Controller
         $invoices->invoice_date = $request->input('invoice_date');
         if (!empty($request->file)) {
              $file = $request->file;
-                    $filename = time().'-'.$file->getClientOriginalName();  
+                    $filename = 'INV'.'-'.$file->getClientOriginalName();  
                 $file->move(public_path('documents'), $filename);
                 $files = $filename; 
                 $invoices->invoice_doc = $files;
@@ -180,11 +180,15 @@ class invoiceController extends Controller
 
     public function download($id){
         $invoices = invoice::find($id);
-        // dd($invoices);
         $fileName = $invoices->invoice_doc;
         $filePath = public_path('documents/'.$fileName);
-      $headers = ['Content-Type: application/pdf'];
-     return response()->download($filePath, $fileName, $headers);
+        $headers = ['Content-Type: application/pdf'];
+        if (file_exists($fileName)) {
+            return response()->download($filePath, $fileName, $headers);
+        } 
+        else {
+            return redirect()->back()->with('error','File Not Exist!');
+        }
 
     }
 

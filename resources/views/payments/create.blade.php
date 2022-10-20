@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="font-weight-bolder mb-0">{{__('labels.add_payment')}}</h5>
-            <p class="mb-0 text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+            <p class="mb-0 text-sm">Please complete payment by submitting proof of payment. </p>
 
             </p>
             <hr class="horizontal dark mt-2">
@@ -39,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="name">Amount</label>
-                            <input value="{{convert_currency($invoices->amount)}}" type="text" class="form-control" name="amount" required disabled>
+                            <input value="{{$invoices->amount}}" type="text" class="form-control" name="amount" required disabled>
                             <span class="text-danger">@error('amount') {{$message}} @enderror</span>
 
                         </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="password">Payment Date</label>
+                            <label for="password">Payment Date <span class="text-danger">*</span></label>
                             <input type="date" 
                             class="form-control" 
                             name="payment_date" required>
@@ -73,8 +73,8 @@
                 <div class="row ">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="proof">{{__('labels.proof')}}</label>
-                            <input type="file" name="file" class="form-control" >
+                            <label for="proof">Upload Proof of Payment <span class="text-danger">*</span></label>
+                            <input type="file" name="file" class="form-control" required>
                             <span  class="text-danger text-sm ">@error('proof  ') {{$message}} @enderror</span>
                         </div>
                     </div>

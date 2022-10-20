@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\AdminNotificationController;
+use App\Http\Controllers\AttachementController;
 use App\Http\Controllers\CreditNoteController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\DebitNoteController;
@@ -159,5 +160,9 @@ require __DIR__.'/auth.php';
     Route::get('/deliveryOrders/download/{id}',[DeliveryOrderController::class,'download'])->name('deliveryOrder.download');
     Route::resource('deliveryOrders','DeliveryOrderController');
 
+
+    //Routes For client side attachement
+
+    Route::get('file/download',[AttachementController::class,'getDownload'])->name('file.download');
 
 

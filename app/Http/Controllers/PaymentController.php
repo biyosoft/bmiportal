@@ -113,7 +113,7 @@ class PaymentController extends Controller
        $admins = Admin::all();
         // Notification::send($admins, new PaymentProofUploaded($user,$invoices,$payments));
     //    Admin::all()->notify(new PaymentProofUploaded($user));
-       return redirect()->back()
+       return redirect()->route('pays.index')
        ->with('success','The New Payment Is Added');
     }
 

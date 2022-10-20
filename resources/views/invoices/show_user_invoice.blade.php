@@ -17,11 +17,6 @@
     <div class="col m-2">
         <div class="card">
             <div class="card-body">
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{session('success')}}
-                </div>
-                @endif
                 <div class="row">
                     <div class="col">
                         <h5 class="font-weight-bolder mb-0">Invoice Details</h5>
@@ -48,8 +43,8 @@
                         </a></p>
                     </div>
                     <div class="col">
-                        <b>Amount</b>
-                        <p>{{convert_currency($invoice[0]->amount)}}</p>
+                        <b>Amount (RM)</b>
+                        <p>{{$invoice[0]->amount}}</p>
                     </div>
                 </div>
             </div>
