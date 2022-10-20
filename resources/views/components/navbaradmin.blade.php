@@ -116,7 +116,10 @@ $customerName = Auth::guard('admin')->user()->name;
         </a>
       </div>
       <div class="mt-3">
-        <a class="nav-link" href="" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <form action="{{route('admin.logout')}}" id="logout-form" method="post" class="d_none">
+            @csrf
+        </form>
+        <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
           <!-- <span class="nav-link-text ms-1">Change Password</span> -->
           <h6 class="mb-0">Logout</h6>
         </a>

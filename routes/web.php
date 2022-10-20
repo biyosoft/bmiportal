@@ -39,7 +39,7 @@ Route::get('/', function () {
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->middleware(['verfied','auth','request'])->name('dashboard');
+    })->middleware(['auth','request'])->name('dashboard');
 
 require __DIR__.'/auth.php';
         

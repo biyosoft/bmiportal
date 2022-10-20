@@ -25,7 +25,7 @@
                       <label class="form-check-label" for="rememberMe">{{__('labels.remember_me')}}</label>
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn btn-lg bg-gradient-info btn-lg w-100 mt-4 mb-0">Sign in</button>
                     </div>
                   </form>
                 </div>
@@ -34,20 +34,13 @@
                   @if (Route::has('password.request'))
                    <a href="{{ route('password.request') }}">{{__('labels.forget_password')}}</a>
                   @endif
-                    <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
-                <img src="{{asset('soft-theme/assets/img/shapes/pattern-lines.svg')}}" alt="pattern-lines" class="position-absolute opacity-4 start-0">
-                <div class="position-relative">
-                  <img class="max-width-500 w-100 position-relative z-index-2" src="{{asset('soft-theme/assets/img/illustrations/chat.png')}}" alt="chat-img">
-                </div>
-                <h4 class="mt-5 text-white font-weight-bolder">"Attention is the new currency"</h4>
-                <p class="text-white">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
-              </div>
+            <div class="border-radius-lg col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <img src="{{asset('images/bmi_customer.jpeg')}}" alt="BMI PORTAL">
             </div>
           </div>
         </div>

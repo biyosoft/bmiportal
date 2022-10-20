@@ -124,7 +124,10 @@ $customerName = Auth::user()->name;
         </a>
       </div>
       <div class="mt-3">
-        <a class="nav-link" href="" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <form action="{{route('logout')}}" method="POST" id="logout-form">
+          @csrf
+        </form>
+        <a class="nav-link" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
           <!-- <span class="nav-link-text ms-1">Change Password</span> -->
           <h6 class="mb-0">Logout</h6>
         </a>
